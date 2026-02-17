@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>KIT FASE 0 — Clareza sem ansiedade | Manual da VidA</title>
+
+  <meta name="mv:categoria" content="MÃE"/>
+  <meta name="mv:projeto" content="Manual da VidA"/>
+  <meta name="mv:fase" content="FASE 0 — Gestação"/>
+  <meta name="mv:kit" content="KIT-FASE-0-CLAREZA"/>
+
+  <style>
+    :root{
+      /* Editorial calmo (gestação) */
+      --bg1:#fff7f5; --bg2:#fdeeea;
+      --paper:#ffffff; --ink:#2f2522;
+      --muted:#6d5750; --muted2:#8a6f67;
+      --line:#f0d6ce;
+
+      --accent:#d98274; --accent2:#b86b60;
+      --accentSoft: rgba(217,130,116,.16);
+
+      --okBg:#f2fbf6;   --okLine:#cbe9d6;
+      --midBg:#fff8ee;  --midLine:#f3d3a4;
+      --talkBg:#f7f2ff; --talkLine:#d9c9ff;
+
+      --shadow: 0 18px 45px rgba(17,12,10,.08);
+      --shadow2: 0 10px 25px rgba(17,12,10,.06);
+
+      --r: 22px; --r2: 16px; --max: 1040px;
+      --focus: rgba(217,130,116,.22);
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      color:var(--ink);
+      font: 16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:
+        radial-gradient(900px 450px at 15% 0%, rgba(217,130,116,.15), transparent 60%),
+        radial-gradient(900px 450px at 85% 20%, rgba(184,107,96,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:22px 16px 64px; }
+    .top{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(10px);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .badgeRow{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid var(--line);
+      background: #fff;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+      box-shadow: var(--shadow2);
+      user-select:none;
+    }
+    .dot{ width:9px; height:9px; border-radius:99px; background:var(--accent); box-shadow: 0 0 0 4px rgba(217,130,116,.15); }
+    h1{ margin:0; font-size:22px; letter-spacing:.2px; }
+    .sub{ margin:8px 0 0; color:var(--muted); font-size:14.5px; max-width: 80ch; }
+
+    main{ margin-top:14px; display:grid; gap:14px; }
+
+    .card{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.86);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hd{
+      padding:16px;
+      border-bottom:1px solid rgba(240,214,206,.9);
+      background:
+        radial-gradient(600px 220px at 15% 0%, rgba(217,130,116,.11), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+    }
+    .hd h2{ margin:0; font-size:16px; letter-spacing:.35px; }
+    .meta{ margin-top:6px; font-size:13.5px; color:var(--muted); max-width: 92ch; }
+    .bd{ padding:16px; }
+
+    /* Wizard */
+    .wizard{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+      user-select:none;
+    }
+    .step{
+      display:flex; align-items:center; gap:8px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      padding:10px 12px;
+      border-radius: 999px;
+      box-shadow: var(--shadow2);
+      color: var(--muted);
+      font-size:13.5px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .step .num{
+      width:22px; height:22px;
+      border-radius:999px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: rgba(217,130,116,.14);
+      color: var(--accent2);
+      font-size:12.5px;
+      border:1px solid rgba(217,130,116,.25);
+    }
+    .step[aria-current="true"]{
+      border-color: rgba(217,130,116,.6);
+      color: var(--ink);
+      background: rgba(255,255,255,.9);
+    }
+
+    .grid2{ display:grid; gap:12px; grid-template-columns: 1fr 1fr; }
+    @media (max-width:900px){ .grid2{ grid-template-columns: 1fr; } }
+
+    .panel{
+      border:1px solid var(--line);
+      background: #fff;
+      border-radius: var(--r2);
+      padding:14px;
+      box-shadow: var(--shadow2);
+    }
+    .panel h3{ margin:0 0 8px; font-size:14px; letter-spacing:.3px; }
+    .small{ font-size:13px; color:var(--muted); }
+    .p{ margin:0; color:var(--ink); font-size:14.5px; }
+    .p + .p{ margin-top:10px; }
+
+    .pillRow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(253,238,234,.55);
+      padding:9px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size:13px;
+      cursor:pointer;
+      user-select:none;
+      font-weight:900;
+      transition: border-color .2s ease, transform .05s ease, background .2s ease;
+    }
+    .pill:active{ transform: translateY(1px); }
+    .pill[aria-pressed="true"]{
+      border-color: rgba(217,130,116,.7);
+      color: var(--ink);
+      background: rgba(247,200,191,.45);
+    }
+
+    .zone{
+      border-radius: var(--r2);
+      padding:14px;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow: var(--shadow2);
+    }
+    .zOk{ background: var(--okBg); border-color: var(--okLine); }
+    .zMid{ background: var(--midBg); border-color: var(--midLine); }
+    .zTalk{ background: var(--talkBg); border-color: var(--talkLine); }
+
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:950;
+      font-size:12.5px;
+      border:1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.75);
+      color: var(--muted);
+      margin-bottom:8px;
+      user-select:none;
+    }
+    .tag b{ color:var(--ink); }
+
+    ul{ margin:8px 0 0; padding:0 0 0 18px; color: var(--ink); }
+    li{ margin:6px 0; }
+
+    .why{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px dashed rgba(0,0,0,.12);
+      color: var(--muted);
+      background: rgba(255,255,255,.52);
+      font-size:13.5px;
+    }
+
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px; }
+
+    .btn{
+      appearance:none;
+      border:1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      padding:10px 14px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight:950;
+      font-size:13.5px;
+      box-shadow: var(--shadow2);
+      transition: transform .05s ease, border-color .2s ease, opacity .2s ease;
+      user-select:none;
+    }
+    .btn:hover{ border-color: rgba(217,130,116,.55); }
+    .btn:active{ transform: translateY(1px); }
+    .btn:focus{ outline:none; box-shadow:0 0 0 4px var(--focus); }
+    .btn.primary{
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      border-color: rgba(0,0,0,0);
+      color:#fff;
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.65);
+      color: var(--muted);
+    }
+    .btn[disabled]{ opacity:.55; cursor:not-allowed; }
+
+    .hint{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      color: var(--muted);
+      font-size:13.5px;
+    }
+
+    textarea{
+      width:100%;
+      min-height: 170px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      padding:12px;
+      font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .fields{
+      display:grid; gap:10px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width:900px){ .fields{ grid-template-columns:1fr; } }
+
+    label{ font-weight:900; font-size:13px; color:var(--muted); display:block; margin-bottom:6px; }
+    input{
+      width:100%;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      padding:12px;
+      font: 14px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background: #fff;
+      color: var(--ink);
+      box-shadow: var(--shadow2);
+    }
+    input:focus{ outline:none; box-shadow:0 0 0 4px var(--focus); }
+
+    details{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.86);
+      box-shadow: var(--shadow2);
+      padding:12px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:950;
+      color: var(--muted);
+      list-style:none;
+      user-select:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .links a{ color: var(--accent2); text-decoration:none; font-weight:950; }
+    .links a:hover{ text-decoration: underline; }
+
+    .footerActions{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px; flex-wrap:wrap;
+      margin-top: 6px;
+    }
+    .softLine{
+      height:1px;
+      background: rgba(240,214,206,.9);
+      margin:12px 0;
+    }
+
+    [hidden]{ display:none !important; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap" id="top">
+    <section class="top">
+      <div class="badgeRow">
+        <span class="badge"><span class="dot"></span> FASE 0 — Gestação</span>
+        <span class="badge">KIT: Clareza sem ansiedade</span>
+        <span class="badge">Manual da VidA · Categoria MÃE</span>
+      </div>
+
+      <h1>Clareza sem ansiedade (com PDF)</h1>
+      <p class="sub">
+        Use em 3 passos: <b>selecionar foco</b> → <b>gerar resumo</b> → <b>baixar PDF</b>.
+        Não é diagnóstico clínico e não substitui pré-natal. O objetivo é reduzir ruído e organizar percepção.
+      </p>
+
+      <div class="wizard" role="tablist" aria-label="Passos">
+        <button class="step" data-step="s1" aria-current="true" type="button"><span class="num">1</span> Foco</button>
+        <button class="step" data-step="s2" aria-current="false" type="button"><span class="num">2</span> Decisão leve</button>
+        <button class="step" data-step="s3" aria-current="false" type="button"><span class="num">3</span> Resumo + PDF</button>
+      </div>
+    </section>
+
+    <main>
+      <!-- STEP 1 -->
+      <section class="card" id="s1" aria-label="Passo 1">
+        <div class="hd">
+          <h2>1) Seu foco de hoje (1–2 toques)</h2>
+          <div class="meta">Sem perguntas. Só marcação rápida para personalizar o resumo e o PDF.</div>
+        </div>
+        <div class="bd">
+          <div class="grid2">
+            <div class="panel">
+              <h3>Marque o que mais está pesando</h3>
+              <div class="pillRow" role="group" aria-label="Seleção de foco">
+                <button class="pill" type="button" data-pick="fadiga" aria-pressed="false">Cansaço / sono</button>
+                <button class="pill" type="button" data-pick="enjoo" aria-pressed="false">Enjoos / náuseas</button>
+                <button class="pill" type="button" data-pick="humor" aria-pressed="false">Oscilação emocional</button>
+                <button class="pill" type="button" data-pick="corpo" aria-pressed="false">Sensações estranhas</button>
+                <button class="pill" type="button" data-pick="info" aria-pressed="false">Excesso de informação</button>
+                <button class="pill" type="button" data-pick="sono" aria-pressed="false">Sono ruim</button>
+              </div>
+
+              <div class="softLine"></div>
+
+              <div class="fields">
+                <div>
+                  <label for="week">Semana de gestação (opcional)</label>
+                  <input id="week" inputmode="numeric" placeholder="Ex.: 10"/>
+                </div>
+                <div>
+                  <label for="date">Data (opcional)</label>
+                  <input id="date" placeholder="Ex.: 17/02/2026"/>
+                </div>
+              </div>
+
+              <div class="hint">
+                Regra do kit: se for “zona cinza”, a saída é <b>registrar</b>, não investigar.
+              </div>
+
+              <div class="row">
+                <button class="btn primary" id="btnNextToS2" type="button">Continuar</button>
+                <button class="btn ghost" id="btnBuildQuick" type="button">Gerar resumo agora</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>O que você ganha (objetivo)</h3>
+              <p class="p">
+                Você vai sair com:
+              </p>
+              <ul>
+                <li>Um filtro simples: <b>pode ignorar</b> / <b>zona cinza</b> / <b>vale conversar</b></li>
+                <li>Um resumo copiável (curto ou completo)</li>
+                <li>Um PDF imprimível que inclui <b>o resumo completo</b> (quantas páginas precisar)</li>
+              </ul>
+              <p class="p small" style="margin-top:10px;">
+                Não é conteúdo infinito. É ferramenta de redução de ruído.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="card" id="s2" aria-label="Passo 2" hidden>
+        <div class="hd">
+          <h2>2) Decisão leve (sem pânico, sem enciclopédia)</h2>
+          <div class="meta">Categorias para você parar de pesquisar e gastar energia com o lugar errado.</div>
+        </div>
+        <div class="bd">
+          <div class="grid2">
+            <div class="zone zOk">
+              <div class="tag"><b>Pode ignorar</b> (na maioria dos casos)</div>
+              <ul>
+                <li><b>Cansaço</b>/sonolência (especialmente no início)</li>
+                <li><b>Náuseas/enjoos</b> leves/intermitentes</li>
+                <li><b>Oscilação emocional</b> leve</li>
+                <li><b>Estranheza corporal</b> difícil de nomear</li>
+              </ul>
+              <div class="why">
+                Se está no padrão comum e não muda seu funcionamento de forma intensa, isso não precisa virar pesquisa.
+              </div>
+            </div>
+
+            <div class="zone zMid">
+              <div class="tag"><b>Zona cinza</b> (observe com calma)</div>
+              <ul>
+                <li>Aparece e some sem padrão</li>
+                <li>Dias bons vs. dias ruins</li>
+                <li>Comparar com outras gestantes</li>
+                <li>Buscar “semana exata” para tudo</li>
+              </ul>
+              <div class="why">
+                Saída do kit: registrar &gt; investigar. O Google tende a piorar quando você está tentando “fechar certeza total”.
+              </div>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="zone zTalk">
+            <div class="tag"><b>Vale conversar</b> (sem pânico)</div>
+            <ul>
+              <li>Sai do seu padrão e você não consegue “soltar”</li>
+              <li>A dúvida vira ansiedade persistente</li>
+              <li>Sinais descritos em fontes de saúde (links no final)</li>
+            </ul>
+            <div class="why">
+              Não é urgência automática. É reconhecer que validação humana reduz incerteza melhor do que internet.
+            </div>
+          </div>
+
+          <div class="footerActions">
+            <button class="btn ghost" id="btnBackToS1" type="button">Voltar</button>
+            <button class="btn primary" id="btnNextToS3" type="button">Ir para resumo</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="card" id="s3" aria-label="Passo 3" hidden>
+        <div class="hd">
+          <h2>3) Seu resumo copiável + PDF</h2>
+          <div class="meta">
+            O PDF sai estruturado e com paginação automática. O resumo vai completo (sem corte).
+          </div>
+        </div>
+        <div class="bd">
+          <div class="panel">
+            <h3>Resumo (gerado)</h3>
+            <textarea id="outText" readonly placeholder="Clique em “Gerar meu resumo”..."></textarea>
+
+            <div class="row">
+              <button class="btn primary" id="btnCopy" type="button">Copiar texto</button>
+              <button class="btn" id="btnShort" type="button">Versão curta</button>
+              <button class="btn" id="btnFull" type="button">Versão completa</button>
+              <button class="btn ghost" id="btnRegen" type="button">Gerar meu resumo</button>
+            </div>
+
+            <!-- PDF button MUST be after the summary + response buttons -->
+            <div class="row" style="margin-top:14px;">
+              <button class="btn" id="btnPDF" type="button">Baixar PDF</button>
+            </div>
+
+            <div class="hint">
+              O PDF inclui: Cabeçalho + Semana/Data + 3 zonas + Perguntas para levar ao profissional + Seu resumo completo.
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="panel">
+            <h3>Perguntas para levar ao profissional (entra no PDF)</h3>
+            <p class="small">Curto, objetivo, sem dramatização.</p>
+            <ul id="qList">
+              <li>“Pelo meu relato, o que você considera ‘normal da adaptação’ e o que vale observar?”</li>
+              <li>“Qual sinal específico seria o ‘gatilho’ para eu entrar em contato?”</li>
+              <li>“O que você recomenda para reduzir minha carga de informação sem me deixar insegura?”</li>
+            </ul>
+          </div>
+
+          <div class="footerActions">
+            <button class="btn ghost" id="btnBackToS2" type="button">Voltar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOURCES -->
+      <section class="card" aria-label="Fontes confiáveis">
+        <div class="hd">
+          <h2>Fontes confiáveis (base, não maratona)</h2>
+          <div class="meta">Se abrir link te gerar ansiedade, ignore. O kit funciona sem abrir nada.</div>
+        </div>
+        <div class="bd">
+          <details>
+            <summary>Ver links</summary>
+            <div class="links" style="margin-top:10px;">
+              <p class="small">
+                NHS — sinais e sintomas: <a href="https://www.nhs.uk/pregnancy/trying-for-a-baby/signs-and-symptoms-of-pregnancy/" target="_blank" rel="noreferrer">NHS</a><br/>
+                NHS — cansaço/sono: <a href="https://www.nhs.uk/pregnancy/common-symptoms/tiredness/" target="_blank" rel="noreferrer">NHS</a><br/>
+                MSD Manuals — sintomas na gestação: <a href="https://www.msdmanuals.com/pt/casa/problemas-de-sa%C3%BAde-feminina/sintomas-durante-a-gesta%C3%A7%C3%A3o/introdu%C3%A7%C3%A3o-aos-sintomas-durante-a-gravidez" target="_blank" rel="noreferrer">MSD</a><br/>
+                CDC — warning signs: <a href="https://www.cdc.gov/hearher/maternal-warning-signs/index.html" target="_blank" rel="noreferrer">CDC</a>
+              </p>
+            </div>
+          </details>
+
+          <div class="hint">
+            Limite: este kit não faz diagnóstico clínico e não substitui pré-natal. Ele existe para reduzir ruído e organizar percepção.
+          </div>
+        </div>
+      </section>
+
+      <!-- RESET at end -->
+      <section class="card">
+        <div class="bd">
+          <button class="btn ghost" id="btnResetBottom" type="button">Resetar (voltar ao topo)</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- jsPDF + AutoTable (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.3/dist/jspdf.plugin.autotable.min.js"></script>
+
+  <script>
+    (function(){
+      // ---------- State ----------
+      const picks = new Set();
+      const pills = Array.from(document.querySelectorAll(".pill"));
+
+      const weekEl = document.getElementById("week");
+      const dateEl = document.getElementById("date");
+
+      const out = document.getElementById("outText");
+
+      // steps
+      const stepBtns = Array.from(document.querySelectorAll(".step"));
+      const s1 = document.getElementById("s1");
+      const s2 = document.getElementById("s2");
+      const s3 = document.getElementById("s3");
+
+      function showStep(id){
+        s1.hidden = id !== "s1";
+        s2.hidden = id !== "s2
