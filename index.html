@@ -542,4 +542,328 @@
 
       function showStep(id){
         s1.hidden = id !== "s1";
-        s2.hidden = id !== "s2
+        s2.hidden = id !== "s2";
+        s3.hidden = id !== "s3";
+        stepBtns.forEach(b => b.setAttribute("aria-current", b.dataset.step === id ? "true" : "false"));
+        document.getElementById(id).scrollIntoView({ behavior:"smooth", block:"start" });
+      }
+      stepBtns.forEach(b => b.addEventListener("click", ()=> showStep(b.dataset.step)));
+
+      // nav buttons
+      document.getElementById("btnNextToS2").addEventListener("click", ()=> showStep("s2"));
+      document.getElementById("btnBackToS1").addEventListener("click", ()=> showStep("s1"));
+      document.getElementById("btnNextToS3").addEventListener("click", ()=> {
+        ensureSummary("full");
+        showStep("s3");
+      });
+      document.getElementById("btnBackToS2").addEventListener("click", ()=> showStep("s2"));
+
+      // ---------- Picks ----------
+      function togglePick(key){
+        if(picks.has(key)) picks.delete(key); else picks.add(key);
+        pills.forEach(p => p.setAttribute("aria-pressed", picks.has(p.dataset.pick) ? "true" : "false"));
+      }
+      pills.forEach(p => p.addEventListener("click", ()=> togglePick(p.dataset.pick)));
+
+      function makeLabel(key){
+        const map = {
+          fadiga: "Cansaço/sono",
+          enjoo: "Enjoos/náuseas",
+          humor: "Oscilação emocional",
+          corpo: "Sensações estranhas",
+          info: "Excesso de informação",
+          sono: "Sono ruim"
+        };
+        return map[key] || key;
+      }
+
+      // ---------- Summary ----------
+      function buildSummary(mode){
+        const chosen = Array.from(picks);
+        const chosenLabels = chosen.length ? chosen.map(makeLabel) : ["(sem foco selecionado)"];
+        const week = (weekEl.value || "").trim();
+        const date = (dateEl.value || "").trim();
+
+        let pattern = "Padrão provável: transição comum (sem conclusão clínica).";
+        let why = "Mudanças corporais e hormonais podem alterar energia, apetite, humor e sensações. O kit serve para reduzir ruído e evitar busca compulsiva.";
+        let action = "Ação mínima hoje: tratar como adaptação + reduzir pesquisa + registrar se algo virar zona cinza.";
+
+        if(picks.has("info")){
+          pattern = "Padrão provável: carga cognitiva por excesso de informação.";
+          why = "Muitas versões diferentes aumentam dúvida. O kit ajuda a trocar pesquisa por um registro curto e estável.";
+          action = "Ação mínima hoje: limitar fontes + registrar em 2 linhas + conversar com profissional se ansiedade persistir.";
+        } else if(picks.has("humor") && (picks.has("corpo") || picks.has("fadiga"))){
+          pattern = "Padrão provável: oscilação (corpo e mente em ritmos diferentes).";
+          why = "Oscilar pode acontecer em transições. O kit te dá categorias simples para você não precisar fechar explicação todo dia.";
+          action = "Ação mínima hoje: aceitar oscilação como categoria + registrar apenas o que muda seu funcionamento.";
+        }
+
+        const header = [
+          "REGISTRO — Manual da VidA (FASE 0 — Gestação)",
+          "Kit: Clareza sem ansiedade",
+          week ? ("Semana: " + week) : "Semana: (não informada)",
+          date ? ("Data: " + date) : "Data: (não informada)",
+          ""
+        ];
+
+        const shortV = [
+          "Foco de hoje: " + chosenLabels.join(", "),
+          pattern,
+          "Ação mínima hoje: " + action,
+          "",
+          "Frase para consulta:",
+          "“Estou gestante e tenho dúvidas sobre a normalidade do que sinto. Meu foco hoje foi: " + chosenLabels.join(", ") + ". Gostaria de contextualizar o que observar.”",
+          "",
+          "Limite: este registro não faz diagnóstico e não substitui pré-natal."
+        ];
+
+        const fullV = [
+          "Foco de hoje (selecionado no kit): " + chosenLabels.join(", "),
+          "",
+          "Leitura rápida (neutra):",
+          "- " + pattern,
+          "- Por que aparece: " + why,
+          "",
+          "Regra anti-google (do kit):",
+          "- Se estiver em 'zona cinza', registrar > pesquisar.",
+          "- Se precisar de validação humana, conversar > maratonar internet.",
+          "",
+          "Ação mínima hoje (sem esforço extra):",
+          "- " + action,
+          "",
+          "O que eu posso parar de perseguir hoje:",
+          "- Fechar certeza total.",
+          "- Comparar com outras gestantes como regra.",
+          "",
+          "Frase para consulta (copiar/colar):",
+          "“Estou gestante e tenho dúvidas sobre a normalidade do que sinto. Meu foco hoje foi: " + chosenLabels.join(", ") + ". Eu gostaria de discutir o que observar e o que pode ser considerado parte de adaptação.”",
+          "",
+          "Limite: este registro não faz diagnóstico clínico e não substitui pré-natal."
+        ];
+
+        return header.concat(mode === "short" ? shortV : fullV).join("\n");
+      }
+
+      function ensureSummary(mode){
+        out.value = buildSummary(mode);
+      }
+
+      document.getElementById("btnBuildQuick").addEventListener("click", ()=>{
+        ensureSummary("full");
+        showStep("s3");
+      });
+
+      document.getElementById("btnRegen").addEventListener("click", ()=> ensureSummary("full"));
+      document.getElementById("btnShort").addEventListener("click", ()=> ensureSummary("short"));
+      document.getElementById("btnFull").addEventListener("click", ()=> ensureSummary("full"));
+
+      // Copy
+      const btnCopy = document.getElementById("btnCopy");
+      btnCopy.addEventListener("click", async ()=>{
+        const txt = (out.value || "").trim();
+        if(!txt) return;
+        try{
+          await navigator.clipboard.writeText(txt);
+          btnCopy.textContent = "Copiado";
+          setTimeout(()=> btnCopy.textContent = "Copiar texto", 900);
+        }catch(e){
+          out.focus(); out.select(); document.execCommand("copy");
+        }
+      });
+
+      // ---------- PDF (robust pagination) ----------
+      function pdfHeader(doc, pageW, margin, week, date){
+        // soft header band
+        doc.setFillColor(255, 247, 245);
+        doc.rect(0, 0, pageW, 30, "F");
+
+        doc.setFont("helvetica","bold");
+        doc.setTextColor(47,37,34);
+        doc.setFontSize(15);
+        doc.text("KIT FASE 0 — Clareza sem ansiedade", margin, 14);
+
+        doc.setFont("helvetica","normal");
+        doc.setTextColor(109,87,80);
+        doc.setFontSize(9.6);
+        doc.text("Ficha + resumo do dia. Não é diagnóstico clínico. Serve para reduzir ruído e organizar percepção.", margin, 20);
+
+        doc.setFontSize(9.2);
+        doc.text("Semana: " + (week || "—") + "   |   Data: " + (date || "—"), margin, 26);
+      }
+
+      function addPage(doc){
+        doc.addPage();
+        const pageW = doc.internal.pageSize.getWidth();
+        const margin = 14;
+        pdfHeader(doc, pageW, margin, (weekEl.value||"").trim(), (dateEl.value||"").trim());
+        return 34; // y start after header
+      }
+
+      function textBlock(doc, text, x, y, maxW, lineH, bottomY){
+        const lines = doc.splitTextToSize(text, maxW);
+        for (const ln of lines){
+          if (y + lineH > bottomY){
+            y = addPage(doc);
+          }
+          doc.text(ln, x, y);
+          y += lineH;
+        }
+        return y;
+      }
+
+      function bulletBlock(doc, items, x, y, maxW, lineH, bottomY){
+        for (const item of items){
+          const pref = "• " + item;
+          const lines = doc.splitTextToSize(pref, maxW);
+          for (let i=0;i<lines.length;i++){
+            if (y + lineH > bottomY){
+              y = addPage(doc);
+            }
+            doc.text(lines[i], x, y);
+            y += lineH;
+          }
+          y += 1.2;
+        }
+        return y;
+      }
+
+      function sectionTitle(doc, title, x, y, bottomY){
+        if (y + 8 > bottomY) y = addPage(doc);
+        doc.setFont("helvetica","bold");
+        doc.setTextColor(47,37,34);
+        doc.setFontSize(12);
+        doc.text(title, x, y);
+        return y + 6;
+      }
+
+      function downloadPDF(){
+        // guarantee full summary exists
+        if(!(out.value || "").trim()){
+          ensureSummary("full");
+        }
+
+        if(!window.jspdf || !window.jspdf.jsPDF){
+          alert("Falha ao carregar biblioteca de PDF (jsPDF). Verifique sua conexão e recarregue a página.");
+          return;
+        }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ unit:"mm", format:"a4" });
+
+        const pageW = doc.internal.pageSize.getWidth();
+        const pageH = doc.internal.pageSize.getHeight();
+
+        const margin = 14;
+        const x = margin;
+        const maxW = pageW - margin*2;
+        const bottomY = pageH - 14;
+
+        const week = (weekEl.value || "").trim();
+        const date = (dateEl.value || "").trim();
+
+        pdfHeader(doc, pageW, margin, week, date);
+
+        let y = 34;
+
+        // Zones as structured tables to prevent layout break
+        doc.setFont("helvetica","normal");
+        doc.setTextColor(47,37,34);
+
+        y = sectionTitle(doc, "Decisão leve (3 zonas)", x, y, bottomY);
+
+        // Use autoTable for clean, non-breaking blocks
+        const zones = [
+          ["Pode ignorar (na maioria dos casos)",
+            "• Cansaço/sonolência (especialmente no início)\n• Enjoos leves/intermitentes\n• Oscilação emocional leve\n• Estranheza corporal difícil de nomear"
+          ],
+          ["Zona cinza (observe com calma)",
+            "• Aparece e some sem padrão\n• Dias bons vs. dias ruins\n• Comparação com outras gestantes\n• Buscar “semana exata” para tudo"
+          ],
+          ["Vale conversar (sem pânico)",
+            "• Sai do seu padrão e você não consegue soltar\n• A dúvida vira ansiedade persistente\n• Sinais descritos em fontes de saúde (links do kit)"
+          ],
+        ];
+
+        // autoTable settings
+        doc.autoTable({
+          startY: y,
+          theme: "grid",
+          styles: { font: "helvetica", fontSize: 9.8, textColor: [47,37,34], cellPadding: 3.5, overflow: "linebreak" },
+          headStyles: { fillColor: [255, 247, 245], textColor: [47,37,34], fontStyle:"bold" },
+          bodyStyles: { fillColor: [255,255,255] },
+          columnStyles: {
+            0: { cellWidth: 62, fontStyle:"bold" },
+            1: { cellWidth: maxW - 62 - 2 }
+          },
+          head: [["Zona", "Conteúdo"]],
+          body: zones,
+          margin: { left: margin, right: margin },
+          didDrawPage: function (data) {
+            // repeat header on new pages
+            if (data.pageNumber > 1){
+              pdfHeader(doc, pageW, margin, week, date);
+            }
+          }
+        });
+
+        y = doc.lastAutoTable.finalY + 8;
+        if (y > bottomY) y = addPage(doc);
+
+        // Questions section
+        y = sectionTitle(doc, "Perguntas para levar ao profissional", x, y, bottomY);
+        const qItems = Array.from(document.querySelectorAll("#qList li")).map(li => li.textContent.trim()).filter(Boolean);
+        doc.setFont("helvetica","normal");
+        doc.setFontSize(10);
+        y = bulletBlock(doc, qItems, x, y, maxW, 5.0, bottomY);
+
+        y += 3;
+        if (y > bottomY) y = addPage(doc);
+
+        // Summary section (FULL, paginated)
+        y = sectionTitle(doc, "Seu resumo copiável (completo)", x, y, bottomY);
+        doc.setFont("courier","normal");
+        doc.setFontSize(9.6);
+        doc.setTextColor(47,37,34);
+
+        const summary = (out.value || "").trim();
+        y = textBlock(doc, summary, x, y, maxW, 4.6, bottomY);
+
+        // Footer note (last page)
+        if (y + 10 > bottomY) y = addPage(doc);
+        doc.setFont("helvetica","normal");
+        doc.setFontSize(9);
+        doc.setTextColor(138,111,103);
+        doc.text("Limite: não faz diagnóstico clínico e não substitui pré-natal.", x, bottomY);
+
+        const now = new Date();
+        const stamp = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
+        doc.save(`KIT_FASE0_${stamp}.pdf`);
+      }
+
+      document.getElementById("btnPDF").addEventListener("click", downloadPDF);
+
+      // ---------- Reset (end of page, scroll top) ----------
+      function resetAll(){
+        picks.clear();
+        pills.forEach(p => p.setAttribute("aria-pressed","false"));
+        weekEl.value = "";
+        dateEl.value = "";
+        out.value = "";
+        showStep("s1");
+        window.scrollTo({ top:0, behavior:"smooth" });
+      }
+      document.getElementById("btnResetBottom").addEventListener("click", resetAll);
+
+      // Build default date once (optional usability; does not force)
+      if(!dateEl.value){
+        const d = new Date();
+        const dd = String(d.getDate()).padStart(2,"0");
+        const mm = String(d.getMonth()+1).padStart(2,"0");
+        const yy = d.getFullYear();
+        dateEl.value = `${dd}/${mm}/${yy}`;
+      }
+
+    })();
+  </script>
+</body>
+</html>
