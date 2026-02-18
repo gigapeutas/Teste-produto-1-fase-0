@@ -2,164 +2,414 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-  <title>KIT FASE 0 — Clareza sem ansiedade | Manual da VidA</title>
-
-  <meta name="mv:categoria" content="MÃE"/>
-  <meta name="mv:projeto" content="Manual da VidA"/>
-  <meta name="mv:fase" content="FASE 0 — Gestação"/>
-  <meta name="mv:kit" content="KIT-FASE-0-CLAREZA"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>Manual da VidA · FASE 0 — Kit Gestação sem Google</title>
 
   <style>
     :root{
-      /* Editorial calmo (gestação) */
-      --bg1:#fff7f5; --bg2:#fdeeea;
-      --paper:#ffffff; --ink:#2f2522;
-      --muted:#6d5750; --muted2:#8a6f67;
-      --line:#f0d6ce;
+      --bg1:#fff5f2;
+      --bg2:#fde6e0;
+      --bg3:#f9dfd7;
 
-      --accent:#d98274; --accent2:#b86b60;
-      --accentSoft: rgba(217,130,116,.16);
+      --paper: rgba(255,255,255,.86);
+      --paper2: rgba(255,255,255,.93);
+      --ink:#1f1715;
+      --muted:#6a5450;
+      --muted2:#8a6f69;
 
-      --okBg:#f2fbf6;   --okLine:#cbe9d6;
-      --midBg:#fff8ee;  --midLine:#f3d3a4;
-      --talkBg:#f7f2ff; --talkLine:#d9c9ff;
+      --line: rgba(238,210,201,.80);
+      --shadow: 0 18px 60px rgba(20,12,10,.14);
+      --shadow2: 0 10px 26px rgba(20,12,10,.09);
 
-      --shadow: 0 18px 45px rgba(17,12,10,.08);
-      --shadow2: 0 10px 25px rgba(17,12,10,.06);
+      --accent:#c86a5e;
+      --accent2:#a9554c;
+      --accentSoft: rgba(200,106,94,.16);
 
-      --r: 22px; --r2: 16px; --max: 1040px;
-      --focus: rgba(217,130,116,.22);
+      --okBg: rgba(231,250,240,.90);
+      --okLine: rgba(164,226,190,.95);
+      --okInk:#195236;
+
+      --midBg: rgba(255,246,229,.94);
+      --midLine: rgba(244,210,153,.95);
+      --midInk:#7a4c10;
+
+      --talkBg: rgba(243,238,255,.94);
+      --talkLine: rgba(216,199,255,.98);
+      --talkInk:#33235f;
+
+      --r: 20px;
+      --r2: 16px;
+      --max: 1100px;
+
+      --focus: rgba(200,106,94,.28);
+
+      --headerH: 64px; /* atualizado via JS */
     }
+
     *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      color:var(--ink);
       font: 16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--ink);
       background:
-        radial-gradient(900px 450px at 15% 0%, rgba(217,130,116,.15), transparent 60%),
-        radial-gradient(900px 450px at 85% 20%, rgba(184,107,96,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
+        radial-gradient(900px 460px at 20% 0%, rgba(200,106,94,.18), transparent 55%),
+        radial-gradient(900px 460px at 85% 20%, rgba(169,85,76,.14), transparent 60%),
+        radial-gradient(900px 520px at 50% 110%, rgba(200,106,94,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2) 55%, var(--bg3));
+      padding-top: calc(var(--headerH) + env(safe-area-inset-top)); /* evita topo tampando */
     }
-    .wrap{ max-width:var(--max); margin:0 auto; padding:22px 16px 64px; }
-    .top{
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 14px 14px 84px; }
+
+    /* ===== Header (slim) ===== */
+    .topbar{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: calc(10px + env(safe-area-inset-top)) 12px 10px;
+      display:flex;
+      justify-content:center;
+      pointer-events:none;
+    }
+    .topbarInner{
+      pointer-events:auto;
+      width: min(var(--max), calc(100% - 20px));
       border:1px solid var(--line);
-      background: rgba(255,255,255,.78);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.80);
+      backdrop-filter: blur(14px);
+      border-radius: 999px;
+      box-shadow: var(--shadow2);
+      padding: 8px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width: 160px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(200,106,94,.14);
+    }
+    .brandTxt{ display:flex; flex-direction:column; line-height:1.1; }
+    .brandTxt b{ font-size: 13px; letter-spacing:.2px; }
+    .brandTxt span{ font-size: 12px; color: var(--muted); }
+
+    .actions{ display:flex; gap:10px; align-items:center; }
+
+    .btn{
+      appearance:none;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.88);
+      color:var(--ink);
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:900;
+      font-size:13.5px;
+      box-shadow: var(--shadow2);
+      transition: transform .05s ease, border-color .2s ease, opacity .2s ease;
+      user-select:none;
+      white-space:nowrap;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .btn:hover{ border-color: rgba(200,106,94,.65); }
+    .btn:active{ transform: translateY(1px); }
+    .btn:focus{ outline:none; box-shadow:0 0 0 4px var(--focus), var(--shadow2); }
+
+    .btn.primary{
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      border-color: transparent;
+      color:#fff;
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.62);
+      color: var(--muted);
+    }
+    .btn.icon{ padding:10px 12px; }
+
+    @media (max-width:760px){
+      .brandTxt span{ display:none; }
+      .btn.pdfTxt span{ display:none; }
+      .btn{ padding:10px 12px; }
+    }
+
+    /* ===== Drawer ===== */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(20,14,12,.35);
+      backdrop-filter: blur(6px);
+      z-index: 60;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+    }
+    .overlay.on{ opacity:1; pointer-events:auto; }
+
+    .drawer{
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(420px, 92vw);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(16px);
+      border-left: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      z-index: 70;
+      transform: translateX(102%);
+      transition: transform .22s ease;
+      display:flex;
+      flex-direction:column;
+      padding-top: env(safe-area-inset-top);
+    }
+    .drawer.on{ transform: translateX(0); }
+
+    .drawerHd{
+      padding: 16px 16px 10px;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(600px 220px at 20% 0%, rgba(200,106,94,.14), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.82));
+    }
+    .drawerHd .row{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .drawerHd h3{ margin:0; font-size:14px; letter-spacing:.2px; }
+    .drawerHd p{ margin:8px 0 0; color: var(--muted); font-size:13.2px; }
+
+    .drawerBd{
+      padding: 12px 16px 16px;
+      display:grid;
+      gap:10px;
+      overflow:auto;
+    }
+
+    .navItem{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.88);
+      box-shadow: var(--shadow2);
+      padding: 12px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .navItem b{ display:block; }
+    .navItem span{ display:block; margin-top:4px; color: var(--muted); font-size:13px; }
+    .navItem:hover{ border-color: rgba(200,106,94,.55); }
+
+    /* ===== Conteúdo ===== */
+    section[id]{ scroll-margin-top: calc(var(--headerH) + env(safe-area-inset-top) + 14px); }
+
+    .hero{
+      border:1px solid var(--line);
+      background: var(--paper);
       border-radius: var(--r);
       box-shadow: var(--shadow);
-      padding:18px;
+      padding: 16px;
+      position: relative;
+      overflow:hidden;
     }
-    .badgeRow{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-40px -40px auto auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle at 30% 30%, rgba(200,106,94,.22), transparent 60%);
+      filter: blur(2px);
+    }
+    .hero h1{ margin:0; font-size: 22px; letter-spacing:-.3px; }
+    .hero p{ margin: 8px 0 0; color: var(--muted); max-width: 96ch; font-size: 14.2px; }
+    .chips{ margin-top:12px; display:flex; flex-wrap:wrap; gap:8px; }
+    .chip{
       border:1px solid var(--line);
-      background: #fff;
-      padding:6px 10px;
       border-radius:999px;
-      font-size:13px;
-      color:var(--muted);
+      padding: 7px 10px;
+      background: rgba(255,255,255,.88);
+      color: var(--muted);
+      font-size: 12.8px;
       box-shadow: var(--shadow2);
       user-select:none;
     }
-    .dot{ width:9px; height:9px; border-radius:99px; background:var(--accent); box-shadow: 0 0 0 4px rgba(217,130,116,.15); }
-    h1{ margin:0; font-size:22px; letter-spacing:.2px; }
-    .sub{ margin:8px 0 0; color:var(--muted); font-size:14.5px; max-width: 80ch; }
-
-    main{ margin-top:14px; display:grid; gap:14px; }
 
     .card{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.86);
+      background: var(--paper2);
       border-radius: var(--r);
       box-shadow: var(--shadow);
       overflow:hidden;
+      margin-top:12px;
     }
     .hd{
-      padding:16px;
-      border-bottom:1px solid rgba(240,214,206,.9);
+      padding:14px 14px 12px;
+      border-bottom:1px solid var(--line);
       background:
-        radial-gradient(600px 220px at 15% 0%, rgba(217,130,116,.11), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+        radial-gradient(650px 240px at 15% 0%, rgba(200,106,94,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.82));
     }
-    .hd h2{ margin:0; font-size:16px; letter-spacing:.35px; }
-    .meta{ margin-top:6px; font-size:13.5px; color:var(--muted); max-width: 92ch; }
-    .bd{ padding:16px; }
-
-    /* Wizard */
-    .wizard{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:12px;
-      user-select:none;
-    }
-    .step{
-      display:flex; align-items:center; gap:8px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.72);
-      padding:10px 12px;
-      border-radius: 999px;
-      box-shadow: var(--shadow2);
-      color: var(--muted);
-      font-size:13.5px;
-      font-weight:900;
-      cursor:pointer;
-    }
-    .step .num{
-      width:22px; height:22px;
-      border-radius:999px;
-      display:inline-flex; align-items:center; justify-content:center;
-      background: rgba(217,130,116,.14);
-      color: var(--accent2);
-      font-size:12.5px;
-      border:1px solid rgba(217,130,116,.25);
-    }
-    .step[aria-current="true"]{
-      border-color: rgba(217,130,116,.6);
-      color: var(--ink);
-      background: rgba(255,255,255,.9);
-    }
+    .hd h2{ margin:0; font-size:15px; letter-spacing:.2px; }
+    .meta{ margin-top:6px; font-size:13.4px; color:var(--muted); max-width: 96ch; }
+    .bd{ padding:14px; }
 
     .grid2{ display:grid; gap:12px; grid-template-columns: 1fr 1fr; }
-    @media (max-width:900px){ .grid2{ grid-template-columns: 1fr; } }
+    @media (max-width:920px){ .grid2{ grid-template-columns: 1fr; } }
 
     .panel{
       border:1px solid var(--line);
-      background: #fff;
+      background: rgba(255,255,255,.94);
       border-radius: var(--r2);
-      padding:14px;
+      padding:12px;
       box-shadow: var(--shadow2);
     }
-    .panel h3{ margin:0 0 8px; font-size:14px; letter-spacing:.3px; }
+    .panel h3{ margin:0 0 8px; font-size:14px; letter-spacing:.15px; }
     .small{ font-size:13px; color:var(--muted); }
-    .p{ margin:0; color:var(--ink); font-size:14.5px; }
-    .p + .p{ margin-top:10px; }
 
-    .pillRow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-    .pill{
+    label{ display:block; font-weight:900; font-size:13px; color:var(--muted); margin-bottom:6px; }
+    input, select{
+      width:100%;
+      border-radius: 14px;
       border:1px solid var(--line);
-      background: rgba(253,238,234,.55);
-      padding:9px 12px;
-      border-radius: 999px;
-      color: var(--muted);
-      font-size:13px;
-      cursor:pointer;
-      user-select:none;
-      font-weight:900;
-      transition: border-color .2s ease, transform .05s ease, background .2s ease;
+      padding:12px;
+      font: 14px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:#fff;
+      color:var(--ink);
+      box-shadow: var(--shadow2);
     }
-    .pill:active{ transform: translateY(1px); }
-    .pill[aria-pressed="true"]{
-      border-color: rgba(217,130,116,.7);
-      color: var(--ink);
-      background: rgba(247,200,191,.45);
+    input:focus, select:focus{ outline:none; box-shadow:0 0 0 4px var(--focus); }
+
+    .hint{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.78);
+      color: var(--muted);
+      font-size:13.4px;
     }
 
+    .qItem{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background:#fff;
+      box-shadow: var(--shadow2);
+      padding:12px;
+      display:grid;
+      gap:10px;
+    }
+    .qTop{
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:flex-start; justify-content:space-between;
+    }
+    .qLeft{ display:flex; gap:10px; align-items:flex-start; min-width: 240px; flex:1; }
+    .qName{ font-weight:950; letter-spacing:-.1px; }
+    input[type="checkbox"]{
+      width:auto;
+      box-shadow:none;
+      transform: scale(1.12);
+      accent-color: var(--accent2);
+      margin-top:4px;
+    }
+    .qControls{
+      display:grid; gap:10px;
+      grid-template-columns: 1fr 1fr;
+      align-items:end;
+    }
+    @media (max-width:760px){ .qControls{ grid-template-columns: 1fr; } }
+
+    .resultBox{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.97);
+      box-shadow: var(--shadow2);
+      padding:12px;
+      display:grid;
+      gap:8px;
+    }
+    .badgeRes{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      font-weight:950;
+      font-size:12.5px;
+      border:1px solid rgba(0,0,0,.06);
+      background:#fff;
+      color: var(--muted);
+      width: fit-content;
+    }
+    .bOk{ background: var(--okBg); border-color: var(--okLine); color: var(--okInk); }
+    .bMid{ background: var(--midBg); border-color: var(--midLine); color: var(--midInk); }
+    .bTalk{ background: var(--talkBg); border-color: var(--talkLine); color: var(--talkInk); }
+
+    .footer{
+      margin-top:12px;
+      display:flex;
+      justify-content:flex-start;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    /* Checklist: tabela no desktop, cards no mobile */
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background:#fff;
+      box-shadow: var(--shadow2);
+    }
+    th, td{
+      text-align:left;
+      padding:10px 10px;
+      border-bottom:1px solid rgba(238,210,201,.70);
+      vertical-align:top;
+      font-size:13.4px;
+    }
+    th{
+      font-size:12.4px;
+      letter-spacing:.2px;
+      color:var(--muted);
+      background: rgba(255,247,245,.95);
+    }
+    tr:last-child td{ border-bottom:none; }
+
+    .mobileCards{ display:none; }
+    @media (max-width:760px){
+      table{ display:none; }
+      .mobileCards{ display:grid; gap:10px; }
+      .mCard{
+        border:1px solid var(--line);
+        background:#fff;
+        border-radius: 16px;
+        box-shadow: var(--shadow2);
+        padding:12px;
+      }
+      .mTitle{ font-weight:950; margin:0; }
+      .mCols{ display:grid; gap:10px; margin-top:10px; }
+      .mBox{
+        border-radius: 12px;
+        padding:10px;
+        border:1px solid rgba(0,0,0,.06);
+        background: rgba(255,247,245,.60);
+      }
+      .mBox b{ display:block; margin-bottom:4px; }
+    }
+
+    /* Módulo 2 */
     .zone{
-      border-radius: var(--r2);
-      padding:14px;
+      border-radius: 16px;
+      padding:12px;
       border:1px solid var(--line);
       background:#fff;
       box-shadow: var(--shadow2);
@@ -170,577 +420,763 @@
 
     .tag{
       display:inline-flex; align-items:center; gap:8px;
-      padding:6px 10px;
+      padding:7px 12px;
       border-radius:999px;
       font-weight:950;
       font-size:12.5px;
       border:1px solid rgba(0,0,0,.06);
-      background: rgba(255,255,255,.75);
-      color: var(--muted);
+      background: rgba(255,255,255,.84);
+      color:var(--muted);
       margin-bottom:8px;
       user-select:none;
     }
-    .tag b{ color:var(--ink); }
-
-    ul{ margin:8px 0 0; padding:0 0 0 18px; color: var(--ink); }
+    ul{ margin:8px 0 0; padding:0 0 0 18px; }
     li{ margin:6px 0; }
 
-    .why{
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius: 14px;
-      border:1px dashed rgba(0,0,0,.12);
-      color: var(--muted);
-      background: rgba(255,255,255,.52);
-      font-size:13.5px;
-    }
-
-    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px; }
-
-    .btn{
-      appearance:none;
+    /* Módulo 3 */
+    .pillRow{ display:flex; flex-wrap:wrap; gap:8px; }
+    .pill{
       border:1px solid var(--line);
-      background: #fff;
-      color: var(--ink);
-      padding:10px 14px;
+      background: rgba(253,238,234,.72);
+      padding:8px 11px;
       border-radius: 999px;
+      color: var(--muted);
+      font-size:13px;
       cursor:pointer;
-      font-weight:950;
-      font-size:13.5px;
-      box-shadow: var(--shadow2);
-      transition: transform .05s ease, border-color .2s ease, opacity .2s ease;
       user-select:none;
+      font-weight:900;
     }
-    .btn:hover{ border-color: rgba(217,130,116,.55); }
-    .btn:active{ transform: translateY(1px); }
-    .btn:focus{ outline:none; box-shadow:0 0 0 4px var(--focus); }
-    .btn.primary{
-      background: linear-gradient(180deg, var(--accent), var(--accent2));
-      border-color: rgba(0,0,0,0);
-      color:#fff;
-    }
-    .btn.ghost{
-      background: rgba(255,255,255,.65);
-      color: var(--muted);
-    }
-    .btn[disabled]{ opacity:.55; cursor:not-allowed; }
-
-    .hint{
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius: 16px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.65);
-      color: var(--muted);
-      font-size:13.5px;
+    .pill[aria-pressed="true"]{
+      border-color: rgba(200,106,94,.72);
+      color: var(--ink);
+      background: rgba(200,106,94,.18);
     }
 
     textarea{
       width:100%;
-      min-height: 170px;
+      min-height: 210px;
       border-radius: 16px;
-      border: 1px solid var(--line);
-      padding:12px;
-      font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      background: #fff;
-      color: var(--ink);
-    }
-
-    .fields{
-      display:grid; gap:10px;
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width:900px){ .fields{ grid-template-columns:1fr; } }
-
-    label{ font-weight:900; font-size:13px; color:var(--muted); display:block; margin-bottom:6px; }
-    input{
-      width:100%;
-      border-radius: 14px;
       border:1px solid var(--line);
       padding:12px;
-      font: 14px/1.25 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      background: #fff;
-      color: var(--ink);
+      font: 13.5px/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background:#fff;
+      color:var(--ink);
       box-shadow: var(--shadow2);
     }
-    input:focus{ outline:none; box-shadow:0 0 0 4px var(--focus); }
 
-    details{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255,255,255,.86);
-      box-shadow: var(--shadow2);
-      padding:12px;
+    .fine{
+      margin-top:12px;
+      color: var(--muted2);
+      font-size: 13.2px;
     }
-    summary{
-      cursor:pointer;
-      font-weight:950;
-      color: var(--muted);
-      list-style:none;
-      user-select:none;
-    }
-    summary::-webkit-details-marker{ display:none; }
-    .links a{ color: var(--accent2); text-decoration:none; font-weight:950; }
-    .links a:hover{ text-decoration: underline; }
-
-    .footerActions{
-      display:flex; justify-content:space-between; align-items:center;
-      gap:10px; flex-wrap:wrap;
-      margin-top: 6px;
-    }
-    .softLine{
-      height:1px;
-      background: rgba(240,214,206,.9);
-      margin:12px 0;
-    }
-
-    [hidden]{ display:none !important; }
   </style>
 </head>
 
 <body>
-  <div class="wrap" id="top">
-    <section class="top">
-      <div class="badgeRow">
-        <span class="badge"><span class="dot"></span> FASE 0 — Gestação</span>
-        <span class="badge">KIT: Clareza sem ansiedade</span>
-        <span class="badge">Manual da VidA · Categoria MÃE</span>
+  <!-- Header -->
+  <div class="topbar">
+    <div class="topbarInner" id="topbarInner">
+      <div class="brand">
+        <span class="dot"></span>
+        <div class="brandTxt">
+          <b>Manual da VidA · FASE 0</b>
+          <span>Kit: Gestação sem Google</span>
+        </div>
       </div>
 
-      <h1>Clareza sem ansiedade (com PDF)</h1>
-      <p class="sub">
-        Use em 3 passos: <b>selecionar foco</b> → <b>gerar resumo</b> → <b>baixar PDF</b>.
-        Não é diagnóstico clínico e não substitui pré-natal. O objetivo é reduzir ruído e organizar percepção.
-      </p>
+      <div class="actions">
+        <button class="btn icon" id="btnMenu" type="button" aria-haspopup="dialog" aria-controls="drawer" aria-expanded="false">☰ <span>Menu</span></button>
+        <button class="btn primary pdfTxt" id="btnPDFTop" type="button">⬇️ <span>PDF do Kit</span></button>
+      </div>
+    </div>
+  </div>
 
-      <div class="wizard" role="tablist" aria-label="Passos">
-        <button class="step" data-step="s1" aria-current="true" type="button"><span class="num">1</span> Foco</button>
-        <button class="step" data-step="s2" aria-current="false" type="button"><span class="num">2</span> Decisão leve</button>
-        <button class="step" data-step="s3" aria-current="false" type="button"><span class="num">3</span> Resumo + PDF</button>
+  <!-- Drawer -->
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawerHd">
+      <div class="row">
+        <h3>Navegação do Kit</h3>
+        <button class="btn ghost icon" id="btnCloseMenu" type="button">✕</button>
+      </div>
+      <p>Escolha um módulo. O menu fecha e você cai na sessão certa.</p>
+    </div>
+    <div class="drawerBd">
+      <div class="navItem" data-go="m1">
+        <b>Módulo 1 — Questionário</b>
+        <span>Marca sintomas → Normal / Observar / Vale conversar (sem alarmismo).</span>
+      </div>
+      <div class="navItem" data-go="m1_check">
+        <b>Checklist do trimestre</b>
+        <span>Consulta rápida para reduzir Google (tabela/cads).</span>
+      </div>
+      <div class="navItem" data-go="m2">
+        <b>Módulo 2 — O que fazer agora</b>
+        <span>Ações mínimas: ignorar / observar / conversar.</span>
+      </div>
+      <div class="navItem" data-go="m3">
+        <b>Módulo 3 — Relato pronto + PDF</b>
+        <span>Texto para consulta + PDF completo sem cortes.</span>
+      </div>
+      <div class="navItem" id="navPdf">
+        <b>Baixar PDF agora</b>
+        <span>Exporta questionário, checklist, guia e relato.</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="wrap">
+    <section class="hero" id="top">
+      <h1>KIT FASE 0 — Gestação sem Google</h1>
+      <p>
+        Um kit prático em 3 módulos para reduzir ansiedade de pesquisa e organizar percepção.
+        <b>Não faz diagnóstico</b> e <b>não substitui pré-natal</b>. Ele te ajuda a tomar a próxima ação com calma.
+      </p>
+      <div class="chips">
+        <span class="chip">Menos pesquisa, mais clareza</span>
+        <span class="chip">Resultados tranquilos (sem “risco”)</span>
+        <span class="chip">PDF completo (sem cortar texto)</span>
       </div>
     </section>
 
-    <main>
-      <!-- STEP 1 -->
-      <section class="card" id="s1" aria-label="Passo 1">
-        <div class="hd">
-          <h2>1) Seu foco de hoje (1–2 toques)</h2>
-          <div class="meta">Sem perguntas. Só marcação rápida para personalizar o resumo e o PDF.</div>
+    <!-- MÓDULO 1 -->
+    <section class="card" id="m1">
+      <div class="hd">
+        <h2>Módulo 1 — Questionário (Normal × Observar × Vale conversar)</h2>
+        <div class="meta">
+          Marque o que te representa hoje. O kit devolve um resultado neutro e um “próximo passo mínimo”.
         </div>
-        <div class="bd">
-          <div class="grid2">
-            <div class="panel">
-              <h3>Marque o que mais está pesando</h3>
-              <div class="pillRow" role="group" aria-label="Seleção de foco">
-                <button class="pill" type="button" data-pick="fadiga" aria-pressed="false">Cansaço / sono</button>
-                <button class="pill" type="button" data-pick="enjoo" aria-pressed="false">Enjoos / náuseas</button>
-                <button class="pill" type="button" data-pick="humor" aria-pressed="false">Oscilação emocional</button>
-                <button class="pill" type="button" data-pick="corpo" aria-pressed="false">Sensações estranhas</button>
-                <button class="pill" type="button" data-pick="info" aria-pressed="false">Excesso de informação</button>
-                <button class="pill" type="button" data-pick="sono" aria-pressed="false">Sono ruim</button>
-              </div>
-
-              <div class="softLine"></div>
-
-              <div class="fields">
-                <div>
-                  <label for="week">Semana de gestação (opcional)</label>
-                  <input id="week" inputmode="numeric" placeholder="Ex.: 10"/>
-                </div>
-                <div>
-                  <label for="date">Data (opcional)</label>
-                  <input id="date" placeholder="Ex.: 17/02/2026"/>
-                </div>
-              </div>
-
-              <div class="hint">
-                Regra do kit: se for “zona cinza”, a saída é <b>registrar</b>, não investigar.
-              </div>
-
-              <div class="row">
-                <button class="btn primary" id="btnNextToS2" type="button">Continuar</button>
-                <button class="btn ghost" id="btnBuildQuick" type="button">Gerar resumo agora</button>
-              </div>
-            </div>
-
-            <div class="panel">
-              <h3>O que você ganha (objetivo)</h3>
-              <p class="p">
-                Você vai sair com:
-              </p>
-              <ul>
-                <li>Um filtro simples: <b>pode ignorar</b> / <b>zona cinza</b> / <b>vale conversar</b></li>
-                <li>Um resumo copiável (curto ou completo)</li>
-                <li>Um PDF imprimível que inclui <b>o resumo completo</b> (quantas páginas precisar)</li>
-              </ul>
-              <p class="p small" style="margin-top:10px;">
-                Não é conteúdo infinito. É ferramenta de redução de ruído.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- STEP 2 -->
-      <section class="card" id="s2" aria-label="Passo 2" hidden>
-        <div class="hd">
-          <h2>2) Decisão leve (sem pânico, sem enciclopédia)</h2>
-          <div class="meta">Categorias para você parar de pesquisar e gastar energia com o lugar errado.</div>
-        </div>
-        <div class="bd">
-          <div class="grid2">
-            <div class="zone zOk">
-              <div class="tag"><b>Pode ignorar</b> (na maioria dos casos)</div>
-              <ul>
-                <li><b>Cansaço</b>/sonolência (especialmente no início)</li>
-                <li><b>Náuseas/enjoos</b> leves/intermitentes</li>
-                <li><b>Oscilação emocional</b> leve</li>
-                <li><b>Estranheza corporal</b> difícil de nomear</li>
-              </ul>
-              <div class="why">
-                Se está no padrão comum e não muda seu funcionamento de forma intensa, isso não precisa virar pesquisa.
-              </div>
-            </div>
-
-            <div class="zone zMid">
-              <div class="tag"><b>Zona cinza</b> (observe com calma)</div>
-              <ul>
-                <li>Aparece e some sem padrão</li>
-                <li>Dias bons vs. dias ruins</li>
-                <li>Comparar com outras gestantes</li>
-                <li>Buscar “semana exata” para tudo</li>
-              </ul>
-              <div class="why">
-                Saída do kit: registrar &gt; investigar. O Google tende a piorar quando você está tentando “fechar certeza total”.
-              </div>
-            </div>
-          </div>
-
-          <div style="height:12px"></div>
-
-          <div class="zone zTalk">
-            <div class="tag"><b>Vale conversar</b> (sem pânico)</div>
-            <ul>
-              <li>Sai do seu padrão e você não consegue “soltar”</li>
-              <li>A dúvida vira ansiedade persistente</li>
-              <li>Sinais descritos em fontes de saúde (links no final)</li>
-            </ul>
-            <div class="why">
-              Não é urgência automática. É reconhecer que validação humana reduz incerteza melhor do que internet.
-            </div>
-          </div>
-
-          <div class="footerActions">
-            <button class="btn ghost" id="btnBackToS1" type="button">Voltar</button>
-            <button class="btn primary" id="btnNextToS3" type="button">Ir para resumo</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- STEP 3 -->
-      <section class="card" id="s3" aria-label="Passo 3" hidden>
-        <div class="hd">
-          <h2>3) Seu resumo copiável + PDF</h2>
-          <div class="meta">
-            O PDF sai estruturado e com paginação automática. O resumo vai completo (sem corte).
-          </div>
-        </div>
-        <div class="bd">
+      </div>
+      <div class="bd">
+        <div class="grid2">
           <div class="panel">
-            <h3>Resumo (gerado)</h3>
-            <textarea id="outText" readonly placeholder="Clique em “Gerar meu resumo”..."></textarea>
-
-            <div class="row">
-              <button class="btn primary" id="btnCopy" type="button">Copiar texto</button>
-              <button class="btn" id="btnShort" type="button">Versão curta</button>
-              <button class="btn" id="btnFull" type="button">Versão completa</button>
-              <button class="btn ghost" id="btnRegen" type="button">Gerar meu resumo</button>
+            <h3>Contexto (opcional)</h3>
+            <div class="grid2">
+              <div>
+                <label>Semana de gestação</label>
+                <input id="week_m1" inputmode="numeric" placeholder="Ex.: 10"/>
+              </div>
+              <div>
+                <label>Data</label>
+                <input id="date_m1" placeholder="Ex.: 17/02/2026"/>
+              </div>
             </div>
 
-            <!-- PDF button MUST be after the summary + response buttons -->
-            <div class="row" style="margin-top:14px;">
-              <button class="btn" id="btnPDF" type="button">Baixar PDF</button>
+            <div style="height:10px"></div>
+
+            <label>Trimestre</label>
+            <select id="tri_m1">
+              <option value="1º trimestre">1º trimestre</option>
+              <option value="2º trimestre">2º trimestre</option>
+              <option value="3º trimestre">3º trimestre</option>
+            </select>
+
+            <div class="hint">
+              Observação importante (calma): se você estiver com algo muito intenso “agora” (ex.: desmaio, falta de ar,
+              dor no peito, febre alta, sangramento forte, dor muito forte), vale buscar orientação/atendimento imediatamente.
+              O kit não é para decidir isso.
+            </div>
+
+            <div class="footer">
+              <button class="btn primary" id="btnRunQuiz" type="button">Gerar resultado</button>
+              <button class="btn" id="btnClearQuiz" type="button">Limpar</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Resultado</h3>
+            <div id="quizSummary" class="resultBox">
+              <div class="badgeRes">Marque sintomas e clique em <b>Gerar resultado</b>.</div>
             </div>
 
             <div class="hint">
-              O PDF inclui: Cabeçalho + Semana/Data + 3 zonas + Perguntas para levar ao profissional + Seu resumo completo.
+              Isso é um organizador de decisão, não diagnóstico. A ideia é reduzir a dúvida e poupar sua energia mental.
             </div>
           </div>
+        </div>
 
-          <div style="height:12px"></div>
+        <div style="height:12px"></div>
+
+        <div class="panel">
+          <h3>Sintomas (marque apenas o que te representa hoje)</h3>
+          <div id="quizList" style="display:grid; gap:10px;"></div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="panel" id="m1_check">
+          <h3>Checklist do trimestre (consulta rápida)</h3>
+          <div class="meta" style="margin-top:0;">
+            Referência curta para reduzir Google. No celular vira cards.
+          </div>
+
+          <div style="height:10px;"></div>
+
+          <table aria-label="Checklist Normal x Atenção">
+            <thead>
+              <tr>
+                <th style="width:32%;">Situação</th>
+                <th style="width:34%;">✅ Normal (na maioria)</th>
+                <th style="width:34%;">🟡 Observar / Vale conversar</th>
+              </tr>
+            </thead>
+            <tbody id="checklistBody"></tbody>
+          </table>
+
+          <div class="mobileCards" id="checklistCards"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÓDULO 2 -->
+    <section class="card" id="m2">
+      <div class="hd">
+        <h2>Módulo 2 — O que fazer agora (3 saídas práticas)</h2>
+        <div class="meta">Ações mínimas. Sem “se culpar”, sem “pesquisa infinita”.</div>
+      </div>
+      <div class="bd">
+        <div class="grid2">
+          <div class="zone zOk">
+            <div class="tag">🟢 Normal (na maioria) — pode simplificar</div>
+            <ul>
+              <li>Enjoos leves/intermitentes</li>
+              <li>Cansaço/sono (especialmente no começo)</li>
+              <li>Oscilação emocional leve</li>
+              <li>Sensações corporais novas, mas toleráveis</li>
+            </ul>
+            <div class="hint">Ação mínima: descanso + alimentação/hidratação possível + zero maratona de pesquisa.</div>
+          </div>
+
+          <div class="zone zMid">
+            <div class="tag">🟡 Observar com calma (zona cinza)</div>
+            <ul>
+              <li>Aparece e some sem padrão</li>
+              <li>Alternância de dias bons e ruins</li>
+              <li>Incomoda, mas não te derruba</li>
+              <li>Você quer certeza imediata o tempo todo</li>
+            </ul>
+            <div class="hint">Ação mínima: 2 linhas por dia (intensidade + o que melhora/piora). Isso vale mais que Google.</div>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="zone zTalk">
+          <div class="tag">🔵 Vale conversar com profissional (sem pânico)</div>
+          <ul>
+            <li>Está te impedindo de funcionar</li>
+            <li>Persistiu por vários dias e te desgasta</li>
+            <li>Você não consegue “soltar a dúvida”</li>
+            <li>Você quer um critério personalizado (o que observar e quando avisar)</li>
+          </ul>
+          <div class="hint">Ação mínima: usar o relato pronto. Conversa curta bem feita reduz incerteza melhor do que internet.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÓDULO 3 -->
+    <section class="card" id="m3">
+      <div class="hd">
+        <h2>Módulo 3 — Relato pronto + PDF (kit completo)</h2>
+        <div class="meta">Gere um texto curto e correto para levar ao profissional. O PDF sai completo, sem cortar o resumo.</div>
+      </div>
+      <div class="bd">
+        <div class="grid2">
+          <div class="panel">
+            <h3>Dados (opcionais)</h3>
+            <div class="grid2">
+              <div>
+                <label>Semana de gestação</label>
+                <input id="week" inputmode="numeric" placeholder="Ex.: 10"/>
+              </div>
+              <div>
+                <label>Data</label>
+                <input id="date" placeholder="Ex.: 17/02/2026"/>
+              </div>
+            </div>
+
+            <div style="height:10px;"></div>
+
+            <label>Trimestre</label>
+            <select id="triReport">
+              <option value="1º trimestre">1º trimestre</option>
+              <option value="2º trimestre">2º trimestre</option>
+              <option value="3º trimestre">3º trimestre</option>
+            </select>
+
+            <div style="height:10px;"></div>
+
+            <label>Foco de hoje (marque 1–3)</label>
+            <div class="pillRow" role="group" aria-label="Focos (relatório)">
+              <button class="pill" type="button" data-rpick="Enjoos/náuseas" aria-pressed="false">Enjoos / náuseas</button>
+              <button class="pill" type="button" data-rpick="Cansaço/sono" aria-pressed="false">Cansaço / sono</button>
+              <button class="pill" type="button" data-rpick="Oscilação emocional" aria-pressed="false">Oscilação emocional</button>
+              <button class="pill" type="button" data-rpick="Sensações corporais novas" aria-pressed="false">Sensações corporais novas</button>
+              <button class="pill" type="button" data-rpick="Sono ruim" aria-pressed="false">Sono ruim</button>
+              <button class="pill" type="button" data-rpick="Excesso de informação (ansiedade ao pesquisar)" aria-pressed="false">Excesso de informação</button>
+            </div>
+
+            <div class="footer">
+              <button class="btn primary" id="btnGen" type="button">Gerar relato</button>
+              <button class="btn" id="btnCopy" type="button">Copiar</button>
+            </div>
+
+            <div class="hint">
+              O relato é neutro. Ele organiza comunicação e economiza energia mental.
+            </div>
+          </div>
 
           <div class="panel">
-            <h3>Perguntas para levar ao profissional (entra no PDF)</h3>
-            <p class="small">Curto, objetivo, sem dramatização.</p>
-            <ul id="qList">
-              <li>“Pelo meu relato, o que você considera ‘normal da adaptação’ e o que vale observar?”</li>
-              <li>“Qual sinal específico seria o ‘gatilho’ para eu entrar em contato?”</li>
-              <li>“O que você recomenda para reduzir minha carga de informação sem me deixar insegura?”</li>
-            </ul>
-          </div>
+            <h3>Relato (copiável)</h3>
+            <textarea id="out" readonly placeholder="Clique em “Gerar relato”..."></textarea>
 
-          <div class="footerActions">
-            <button class="btn ghost" id="btnBackToS2" type="button">Voltar</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- SOURCES -->
-      <section class="card" aria-label="Fontes confiáveis">
-        <div class="hd">
-          <h2>Fontes confiáveis (base, não maratona)</h2>
-          <div class="meta">Se abrir link te gerar ansiedade, ignore. O kit funciona sem abrir nada.</div>
-        </div>
-        <div class="bd">
-          <details>
-            <summary>Ver links</summary>
-            <div class="links" style="margin-top:10px;">
-              <p class="small">
-                NHS — sinais e sintomas: <a href="https://www.nhs.uk/pregnancy/trying-for-a-baby/signs-and-symptoms-of-pregnancy/" target="_blank" rel="noreferrer">NHS</a><br/>
-                NHS — cansaço/sono: <a href="https://www.nhs.uk/pregnancy/common-symptoms/tiredness/" target="_blank" rel="noreferrer">NHS</a><br/>
-                MSD Manuals — sintomas na gestação: <a href="https://www.msdmanuals.com/pt/casa/problemas-de-sa%C3%BAde-feminina/sintomas-durante-a-gesta%C3%A7%C3%A3o/introdu%C3%A7%C3%A3o-aos-sintomas-durante-a-gravidez" target="_blank" rel="noreferrer">MSD</a><br/>
-                CDC — warning signs: <a href="https://www.cdc.gov/hearher/maternal-warning-signs/index.html" target="_blank" rel="noreferrer">CDC</a>
-              </p>
+            <div class="footer">
+              <button class="btn primary" id="btnPDFHere" type="button">Baixar PDF (kit completo)</button>
+              <button class="btn ghost" id="btnTop" type="button">Voltar ao topo</button>
             </div>
-          </details>
 
-          <div class="hint">
-            Limite: este kit não faz diagnóstico clínico e não substitui pré-natal. Ele existe para reduzir ruído e organizar percepção.
+            <div class="hint">
+              O PDF inclui: resultado do questionário + checklist + guia + perguntas + relato (sem cortes).
+            </div>
           </div>
         </div>
-      </section>
 
-      <!-- RESET at end -->
-      <section class="card">
-        <div class="bd">
-          <button class="btn ghost" id="btnResetBottom" type="button">Resetar (voltar ao topo)</button>
+        <div style="height:12px;"></div>
+
+        <div class="panel">
+          <h3>Perguntas objetivas para levar ao profissional (entra no PDF)</h3>
+          <ul id="qList">
+            <li>“Pelo meu relato, o que você considera normal da fase e o que vale observar?”</li>
+            <li>“Qual sinal específico seria o gatilho para eu entrar em contato?”</li>
+            <li>“Qual rotina mínima você recomenda para eu reduzir pesquisa e manter segurança?”</li>
+          </ul>
         </div>
-      </section>
-    </main>
+
+        <div class="fine">
+          Limite: este kit não faz diagnóstico clínico e não substitui pré-natal. Objetivo: reduzir ruído e economizar esforço mental.
+        </div>
+      </div>
+    </section>
+
+    <!-- Reset -->
+    <section class="hero" style="padding:14px; margin-top:12px;">
+      <div class="footer" style="margin-top:0; justify-content:space-between;">
+        <div class="small">Se algo estiver te deixando insegura, o melhor “atalho” é validação humana qualificada.</div>
+        <button class="btn" id="btnResetAll" type="button">Resetar (voltar ao topo)</button>
+      </div>
+    </section>
   </div>
 
-  <!-- jsPDF + AutoTable (CDN) -->
+  <!-- jsPDF + AutoTable -->
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.3/dist/jspdf.plugin.autotable.min.js"></script>
 
   <script>
     (function(){
-      // ---------- State ----------
-      const picks = new Set();
-      const pills = Array.from(document.querySelectorAll(".pill"));
-
-      const weekEl = document.getElementById("week");
-      const dateEl = document.getElementById("date");
-
-      const out = document.getElementById("outText");
-
-      // steps
-      const stepBtns = Array.from(document.querySelectorAll(".step"));
-      const s1 = document.getElementById("s1");
-      const s2 = document.getElementById("s2");
-      const s3 = document.getElementById("s3");
-
-      function showStep(id){
-        s1.hidden = id !== "s1";
-        s2.hidden = id !== "s2";
-        s3.hidden = id !== "s3";
-        stepBtns.forEach(b => b.setAttribute("aria-current", b.dataset.step === id ? "true" : "false"));
-        document.getElementById(id).scrollIntoView({ behavior:"smooth", block:"start" });
+      // ===== Ajuste profissional: headerH real (inclui mudanças do mobile/viewport) =====
+      const topbarInner = document.getElementById("topbarInner");
+      function setHeaderH(){
+        const r = topbarInner.getBoundingClientRect();
+        // topbar tem padding vertical (10px + safe-area-top + 10px). O safe-area já está no body padding-top.
+        // Aqui definimos apenas a altura do "pill".
+        const pillH = Math.ceil(r.height + 22); // folga real (sombra + espaço)
+        document.documentElement.style.setProperty("--headerH", pillH + "px");
       }
-      stepBtns.forEach(b => b.addEventListener("click", ()=> showStep(b.dataset.step)));
+      setHeaderH();
+      window.addEventListener("resize", setHeaderH);
+      window.addEventListener("orientationchange", setHeaderH);
+      if(window.visualViewport){
+        window.visualViewport.addEventListener("resize", setHeaderH);
+        window.visualViewport.addEventListener("scroll", setHeaderH);
+      }
+      setTimeout(setHeaderH, 120);
 
-      // nav buttons
-      document.getElementById("btnNextToS2").addEventListener("click", ()=> showStep("s2"));
-      document.getElementById("btnBackToS1").addEventListener("click", ()=> showStep("s1"));
-      document.getElementById("btnNextToS3").addEventListener("click", ()=> {
-        ensureSummary("full");
-        showStep("s3");
+      // ===== Drawer =====
+      const overlay = document.getElementById("overlay");
+      const drawer = document.getElementById("drawer");
+      const btnMenu = document.getElementById("btnMenu");
+      const btnCloseMenu = document.getElementById("btnCloseMenu");
+
+      function openMenu(){
+        overlay.hidden = false;
+        overlay.classList.add("on");
+        drawer.classList.add("on");
+        drawer.setAttribute("aria-hidden","false");
+        btnMenu.setAttribute("aria-expanded","true");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenu(){
+        overlay.classList.remove("on");
+        drawer.classList.remove("on");
+        drawer.setAttribute("aria-hidden","true");
+        btnMenu.setAttribute("aria-expanded","false");
+        document.body.style.overflow = "";
+        setTimeout(()=>{ overlay.hidden = true; }, 200);
+      }
+      btnMenu.addEventListener("click", ()=>{
+        const expanded = btnMenu.getAttribute("aria-expanded")==="true";
+        expanded ? closeMenu() : openMenu();
       });
-      document.getElementById("btnBackToS2").addEventListener("click", ()=> showStep("s2"));
+      btnCloseMenu.addEventListener("click", closeMenu);
+      overlay.addEventListener("click", closeMenu);
+      window.addEventListener("keydown", (e)=>{ if(e.key==="Escape") closeMenu(); });
 
-      // ---------- Picks ----------
-      function togglePick(key){
-        if(picks.has(key)) picks.delete(key); else picks.add(key);
-        pills.forEach(p => p.setAttribute("aria-pressed", picks.has(p.dataset.pick) ? "true" : "false"));
+      document.querySelectorAll(".navItem[data-go]").forEach(el=>{
+        el.addEventListener("click", ()=>{
+          const id = el.dataset.go;
+          closeMenu();
+          setTimeout(()=> document.getElementById(id).scrollIntoView({behavior:"smooth", block:"start"}), 60);
+        });
+      });
+      document.getElementById("navPdf").addEventListener("click", ()=>{
+        closeMenu();
+        setTimeout(()=> downloadKitPDF(), 80);
+      });
+
+      // ===== Data =====
+      const checklist = {
+        "1º trimestre": [
+          { s:"Náuseas / enjoos", n:"Leves a moderados, intermitentes; melhora com pequenas mudanças na alimentação.", a:"Se persistente e te impede de se alimentar/hidratar, vale conversar." },
+          { s:"Cansaço / sono", n:"Sonolência e queda de energia (comum no início).", a:"Se exaustão contínua te impede de funcionar, vale conversar." },
+          { s:"Oscilação emocional", n:"Maior sensibilidade e variação de humor.", a:"Se tristeza/ansiedade persistente por dias e te derruba, vale conversar." },
+          { s:"Sensações corporais novas", n:"Estranheza corporal tolerável (mudança de percepção).", a:"Se dor forte ou persistente, vale validar com profissional." }
+        ],
+        "2º trimestre": [
+          { s:"Energia / disposição", n:"Pode melhorar; oscilar ainda é possível.", a:"Se queda forte e persistente sem explicação, vale conversar." },
+          { s:"Sono", n:"Pode variar por posição, calor, pensamentos.", a:"Se insônia persistente com impacto forte no dia, vale conversar." },
+          { s:"Corpo mudando", n:"Desconfortos leves e flutuação de apetite.", a:"Se dor contínua forte limitando rotina, vale validar." },
+          { s:"Excesso de informação", n:"Dúvidas pontuais e curiosidade.", a:"Se pesquisar aumenta ansiedade, reduzir fontes e conversar pode ajudar." }
+        ],
+        "3º trimestre": [
+          { s:"Cansaço / peso", n:"Mais cansaço por carga física e sono fragmentado.", a:"Se piora progressiva e incapacitante, vale conversar." },
+          { s:"Sono fragmentado", n:"Acordar mais vezes e ajustar posição.", a:"Se privação de sono persistente com impacto intenso, vale conversar." },
+          { s:"Mente acelerada", n:"Pensar em logística/parto variando por dia.", a:"Se ansiedade constante que não reduz com rotina e descanso, vale conversar." },
+          { s:"Desconfortos", n:"Desconfortos comuns da reta final, variando.", a:"Se algo “não está certo” para você, vale validar com profissional." }
+        ]
+      };
+
+      const quizSymptoms = [
+        { id:"nausea", name:"Náuseas / enjoos", hint:"A diferença é o impacto: tolerável vs. te impedir de comer/hidratar." },
+        { id:"fatigue", name:"Cansaço / sonolência", hint:"Comum no início; observe persistência e incapacidade de funcionar." },
+        { id:"mood", name:"Oscilação emocional", hint:"Variação acontece; atenção quando vira sofrimento contínuo." },
+        { id:"sleep", name:"Sono ruim", hint:"Sono pode mudar; observe quando vira exaustão contínua." },
+        { id:"body", name:"Sensações corporais novas", hint:"Estranheza tolerável pode acontecer; dor forte persistente vale validar." },
+        { id:"info", name:"Ansiedade após pesquisar", hint:"Se pesquisar piora, reduzir fontes e buscar validação humana costuma aliviar." }
+      ];
+
+      const durationOptions = [
+        { v:"hoje", label:"Hoje / pontual" },
+        { v:"2-3", label:"2–3 dias" },
+        { v:"semana", label:"1 semana ou mais" }
+      ];
+      const intensityOptions = [
+        { v:"leve", label:"Leve (tolerável)" },
+        { v:"media", label:"Média (incomoda)" },
+        { v:"forte", label:"Forte (atrapalha muito)" }
+      ];
+
+      // ===== Helpers =====
+      function escapeHtml(s){
+        return String(s)
+          .replaceAll("&","&amp;")
+          .replaceAll("<","&lt;")
+          .replaceAll(">","&gt;")
+          .replaceAll('"',"&quot;")
+          .replaceAll("'","&#039;");
       }
-      pills.forEach(p => p.addEventListener("click", ()=> togglePick(p.dataset.pick)));
 
-      function makeLabel(key){
-        const map = {
-          fadiga: "Cansaço/sono",
-          enjoo: "Enjoos/náuseas",
-          humor: "Oscilação emocional",
-          corpo: "Sensações estranhas",
-          info: "Excesso de informação",
-          sono: "Sono ruim"
-        };
-        return map[key] || key;
+      // ===== Checklist render =====
+      const tri_m1 = document.getElementById("tri_m1");
+      const checklistBody = document.getElementById("checklistBody");
+      const checklistCards = document.getElementById("checklistCards");
+
+      function renderChecklist(tri){
+        const rows = checklist[tri] || [];
+        checklistBody.innerHTML = rows.map(r => `
+          <tr>
+            <td><b>${escapeHtml(r.s)}</b></td>
+            <td>${escapeHtml(r.n)}</td>
+            <td>${escapeHtml(r.a)}</td>
+          </tr>
+        `).join("");
+
+        checklistCards.innerHTML = rows.map(r => `
+          <div class="mCard">
+            <p class="mTitle">${escapeHtml(r.s)}</p>
+            <div class="mCols">
+              <div class="mBox"><b>✅ Normal</b>${escapeHtml(r.n)}</div>
+              <div class="mBox"><b>🟡 Observar / Vale conversar</b>${escapeHtml(r.a)}</div>
+            </div>
+          </div>
+        `).join("");
+      }
+      tri_m1.addEventListener("change", ()=> renderChecklist(tri_m1.value));
+      renderChecklist(tri_m1.value);
+
+      // ===== Quiz build =====
+      const quizList = document.getElementById("quizList");
+      const quizSummary = document.getElementById("quizSummary");
+
+      function buildQuiz(){
+        quizList.innerHTML = quizSymptoms.map(s => `
+          <div class="qItem" data-qid="${s.id}">
+            <div class="qTop">
+              <div class="qLeft">
+                <input type="checkbox" id="chk_${s.id}" />
+                <div>
+                  <div class="qName">${escapeHtml(s.name)}</div>
+                  <div class="small">${escapeHtml(s.hint)}</div>
+                </div>
+              </div>
+              <div class="small" style="margin-top:4px;">marque se te representa</div>
+            </div>
+
+            <div class="qControls" data-controls="${s.id}" style="opacity:.55; pointer-events:none;">
+              <div>
+                <label>Intensidade</label>
+                <select id="int_${s.id}">
+                  ${intensityOptions.map(o=>`<option value="${o.v}">${o.label}</option>`).join("")}
+                </select>
+              </div>
+              <div>
+                <label>Duração</label>
+                <select id="dur_${s.id}">
+                  ${durationOptions.map(o=>`<option value="${o.v}">${o.label}</option>`).join("")}
+                </select>
+              </div>
+            </div>
+          </div>
+        `).join("");
+
+        quizSymptoms.forEach(s=>{
+          const chk = document.getElementById(`chk_${s.id}`);
+          const controls = quizList.querySelector(`[data-controls="${s.id}"]`);
+          chk.addEventListener("change", ()=>{
+            const on = chk.checked;
+            controls.style.opacity = on ? "1" : ".55";
+            controls.style.pointerEvents = on ? "auto" : "none";
+          });
+        });
+      }
+      buildQuiz();
+
+      function scoreItem(intensity, duration){
+        let score = 0;
+        if(intensity === "media") score += 1;
+        if(intensity === "forte") score += 2;
+        if(duration === "2-3") score += 1;
+        if(duration === "semana") score += 2;
+        return score; // 0..4
+      }
+      function classifyScore(score){
+        if(score <= 1) return "NORMAL";
+        if(score <= 3) return "OBSERVAR";
+        return "CONVERSAR";
+      }
+      function labelForClass(c){
+        if(c==="NORMAL") return {txt:"✅ Normal (na maioria dos casos)", cls:"bOk"};
+        if(c==="OBSERVAR") return {txt:"🟡 Observar com calma", cls:"bMid"};
+        return {txt:"🔵 Vale conversar com profissional", cls:"bTalk"};
+      }
+      function worstOf(a,b){
+        const rank = {NORMAL:0, OBSERVAR:1, CONVERSAR:2};
+        return (rank[b] > rank[a]) ? b : a;
       }
 
-      // ---------- Summary ----------
-      function buildSummary(mode){
-        const chosen = Array.from(picks);
-        const chosenLabels = chosen.length ? chosen.map(makeLabel) : ["(sem foco selecionado)"];
-        const week = (weekEl.value || "").trim();
-        const date = (dateEl.value || "").trim();
+      function runQuiz(){
+        const tri = tri_m1.value;
+        const week = (document.getElementById("week_m1").value||"").trim();
+        const date = (document.getElementById("date_m1").value||"").trim();
 
-        let pattern = "Padrão provável: transição comum (sem conclusão clínica).";
-        let why = "Mudanças corporais e hormonais podem alterar energia, apetite, humor e sensações. O kit serve para reduzir ruído e evitar busca compulsiva.";
-        let action = "Ação mínima hoje: tratar como adaptação + reduzir pesquisa + registrar se algo virar zona cinza.";
+        const chosen = [];
+        let overall = "NORMAL";
 
-        if(picks.has("info")){
-          pattern = "Padrão provável: carga cognitiva por excesso de informação.";
-          why = "Muitas versões diferentes aumentam dúvida. O kit ajuda a trocar pesquisa por um registro curto e estável.";
-          action = "Ação mínima hoje: limitar fontes + registrar em 2 linhas + conversar com profissional se ansiedade persistir.";
-        } else if(picks.has("humor") && (picks.has("corpo") || picks.has("fadiga"))){
-          pattern = "Padrão provável: oscilação (corpo e mente em ritmos diferentes).";
-          why = "Oscilar pode acontecer em transições. O kit te dá categorias simples para você não precisar fechar explicação todo dia.";
-          action = "Ação mínima hoje: aceitar oscilação como categoria + registrar apenas o que muda seu funcionamento.";
+        quizSymptoms.forEach(s=>{
+          const chk = document.getElementById(`chk_${s.id}`);
+          if(!chk.checked) return;
+          const intensity = document.getElementById(`int_${s.id}`).value;
+          const duration = document.getElementById(`dur_${s.id}`).value;
+          const score = scoreItem(intensity, duration);
+          const cls = classifyScore(score);
+          overall = worstOf(overall, cls);
+          chosen.push({ name:s.name, intensity, duration, cls });
+        });
+
+        if(chosen.length === 0){
+          quizSummary.innerHTML = `<div class="badgeRes">Nenhum item marcado. Marque o que te representa e gere o resultado.</div>`;
+          return { tri, week, date, overall:null, items:[] };
         }
 
-        const header = [
-          "REGISTRO — Manual da VidA (FASE 0 — Gestação)",
-          "Kit: Clareza sem ansiedade",
-          week ? ("Semana: " + week) : "Semana: (não informada)",
-          date ? ("Data: " + date) : "Data: (não informada)",
-          ""
-        ];
+        const badge = labelForClass(overall);
 
-        const shortV = [
-          "Foco de hoje: " + chosenLabels.join(", "),
-          pattern,
-          "Ação mínima hoje: " + action,
-          "",
-          "Frase para consulta:",
-          "“Estou gestante e tenho dúvidas sobre a normalidade do que sinto. Meu foco hoje foi: " + chosenLabels.join(", ") + ". Gostaria de contextualizar o que observar.”",
-          "",
-          "Limite: este registro não faz diagnóstico e não substitui pré-natal."
-        ];
+        const calmText =
+          overall === "NORMAL"
+            ? "Pelo que você marcou, isso tende a estar dentro do esperado da fase. Use o kit para evitar pesquisa excessiva."
+            : overall === "OBSERVAR"
+              ? "Pelo que você marcou, vale observar com calma e registrar por poucos dias. Se persistir ou te desgastar, conversar com um profissional pode trazer clareza."
+              : "Pelo que você marcou, pode ser útil conversar com um profissional para esclarecer com segurança. Isso não é alarme: é um atalho para reduzir incerteza.";
 
-        const fullV = [
-          "Foco de hoje (selecionado no kit): " + chosenLabels.join(", "),
-          "",
-          "Leitura rápida (neutra):",
-          "- " + pattern,
-          "- Por que aparece: " + why,
-          "",
-          "Regra anti-google (do kit):",
-          "- Se estiver em 'zona cinza', registrar > pesquisar.",
-          "- Se precisar de validação humana, conversar > maratonar internet.",
-          "",
-          "Ação mínima hoje (sem esforço extra):",
-          "- " + action,
-          "",
-          "O que eu posso parar de perseguir hoje:",
-          "- Fechar certeza total.",
-          "- Comparar com outras gestantes como regra.",
-          "",
-          "Frase para consulta (copiar/colar):",
-          "“Estou gestante e tenho dúvidas sobre a normalidade do que sinto. Meu foco hoje foi: " + chosenLabels.join(", ") + ". Eu gostaria de discutir o que observar e o que pode ser considerado parte de adaptação.”",
-          "",
-          "Limite: este registro não faz diagnóstico clínico e não substitui pré-natal."
-        ];
+        const nextAction =
+          overall === "NORMAL"
+            ? "Próximo passo mínimo: reduzir pesquisa + focar em descanso, alimentação e hidratação possíveis."
+            : overall === "OBSERVAR"
+              ? "Próximo passo mínimo: anotar 2 linhas (quando começou, intensidade, o que melhora/piora) por 2–3 dias."
+              : "Próximo passo mínimo: usar o Relato pronto (Módulo 3) e levar as perguntas do kit.";
 
-        return header.concat(mode === "short" ? shortV : fullV).join("\n");
+        quizSummary.innerHTML = `
+          <div class="badgeRes ${badge.cls}">${badge.txt}</div>
+          <div class="small">Trimestre: <b>${escapeHtml(tri)}</b> • Semana: <b>${escapeHtml(week||"—")}</b> • Data: <b>${escapeHtml(date||"—")}</b></div>
+          <div>${escapeHtml(calmText)}</div>
+          <div class="small"><b>${escapeHtml(nextAction)}</b></div>
+          <div class="small" style="margin-top:6px;"><b>Itens marcados:</b></div>
+          <ul style="margin:6px 0 0; padding-left:18px;">
+            ${chosen.map(it=>{
+              const b = labelForClass(it.cls);
+              return `<li><b>${escapeHtml(it.name)}</b> — ${escapeHtml(b.txt)}</li>`;
+            }).join("")}
+          </ul>
+        `;
+
+        return { tri, week, date, overall, items: chosen, calmText, nextAction };
       }
 
-      function ensureSummary(mode){
-        out.value = buildSummary(mode);
-      }
-
-      document.getElementById("btnBuildQuick").addEventListener("click", ()=>{
-        ensureSummary("full");
-        showStep("s3");
+      document.getElementById("btnRunQuiz").addEventListener("click", runQuiz);
+      document.getElementById("btnClearQuiz").addEventListener("click", ()=>{
+        quizSymptoms.forEach(s=>{
+          const chk = document.getElementById(`chk_${s.id}`);
+          chk.checked = false;
+          const controls = quizList.querySelector(`[data-controls="${s.id}"]`);
+          controls.style.opacity = ".55";
+          controls.style.pointerEvents = "none";
+          document.getElementById(`int_${s.id}`).value = "leve";
+          document.getElementById(`dur_${s.id}`).value = "hoje";
+        });
+        quizSummary.innerHTML = `<div class="badgeRes">Marque sintomas e clique em <b>Gerar resultado</b>.</div>`;
       });
 
-      document.getElementById("btnRegen").addEventListener("click", ()=> ensureSummary("full"));
-      document.getElementById("btnShort").addEventListener("click", ()=> ensureSummary("short"));
-      document.getElementById("btnFull").addEventListener("click", ()=> ensureSummary("full"));
+      // ===== Relato =====
+      const weekEl = document.getElementById("week");
+      const dateEl = document.getElementById("date");
+      const triReport = document.getElementById("triReport");
+      const out = document.getElementById("out");
+      const reportPills = Array.from(document.querySelectorAll(".pill[data-rpick]"));
+      const rpicks = new Set();
 
-      // Copy
-      const btnCopy = document.getElementById("btnCopy");
-      btnCopy.addEventListener("click", async ()=>{
+      reportPills.forEach(p => p.addEventListener("click", ()=>{
+        const label = p.dataset.rpick;
+        if(rpicks.has(label)) rpicks.delete(label); else rpicks.add(label);
+        p.setAttribute("aria-pressed", rpicks.has(label) ? "true" : "false");
+      }));
+
+      function generateReportText(){
+        const week = (weekEl.value || "").trim();
+        const date = (dateEl.value || "").trim();
+        const tri = (triReport.value || "").trim();
+        const focus = Array.from(rpicks);
+        const focusText = focus.length ? focus.join(", ") : "(não selecionei foco)";
+
+        // leitura neutra baseada em padrões comuns (sem prometer diagnóstico)
+        let pattern = "Padrão provável: adaptação normal da fase com variações (corpo e mente em ritmos diferentes).";
+        let action = "Ação mínima: reduzir pesquisa, registrar o essencial e validar com profissional se persistir.";
+
+        if(Array.from(rpicks).some(x => x.includes("Excesso de informação"))){
+          pattern = "Padrão provável: carga cognitiva por excesso de informação (pesquisa aumenta dúvida/ansiedade).";
+          action = "Ação mínima: limitar fontes, registrar em 2 linhas e buscar validação humana se a dúvida não soltar.";
+        }
+
+        const msg = [
+          "RELATO — Manual da VidA (FASE 0 — Gestação)",
+          "Kit: Gestação sem Google",
+          `Data: ${date || "—"}   |   Semana: ${week || "—"}   |   Trimestre: ${tri || "—"}`,
+          "",
+          `Foco de hoje: ${focusText}`,
+          "",
+          "Leitura neutra:",
+          `- ${pattern}`,
+          "",
+          "O que eu fiz / vou fazer (mínimo):",
+          `- ${action}`,
+          "",
+          "Frase para consulta (copiar/colar):",
+          `“Estou gestante e quero validar a normalidade do que estou sentindo. Meu foco hoje foi: ${focusText}. Gostaria de orientação sobre o que observar e qual seria um sinal específico para eu entrar em contato.”`,
+          "",
+          "Limite: este relato não faz diagnóstico clínico e não substitui pré-natal."
+        ].join("\n");
+
+        out.value = msg;
+        return msg;
+      }
+
+      document.getElementById("btnGen").addEventListener("click", generateReportText);
+      document.getElementById("btnCopy").addEventListener("click", async ()=>{
         const txt = (out.value || "").trim();
         if(!txt) return;
         try{
           await navigator.clipboard.writeText(txt);
-          btnCopy.textContent = "Copiado";
-          setTimeout(()=> btnCopy.textContent = "Copiar texto", 900);
+          const b = document.getElementById("btnCopy");
+          const old = b.textContent;
+          b.textContent = "Copiado";
+          setTimeout(()=> b.textContent = old, 900);
         }catch(e){
           out.focus(); out.select(); document.execCommand("copy");
         }
       });
 
-      // ---------- PDF (robust pagination) ----------
-      function pdfHeader(doc, pageW, margin, week, date){
-        // soft header band
-        doc.setFillColor(255, 247, 245);
-        doc.rect(0, 0, pageW, 30, "F");
+      document.getElementById("btnTop").addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
 
+      // ===== Defaults (data de hoje) =====
+      (function initDates(){
+        const d = new Date();
+        const dd = String(d.getDate()).padStart(2,"0");
+        const mm = String(d.getMonth()+1).padStart(2,"0");
+        const yy = d.getFullYear();
+        if(!document.getElementById("date_m1").value) document.getElementById("date_m1").value = `${dd}/${mm}/${yy}`;
+        if(!dateEl.value) dateEl.value = `${dd}/${mm}/${yy}`;
+      })();
+
+      // ===== PDF (robusto, sem cortar resumo) =====
+      function pdfHeader(doc, pageW, margin){
+        doc.setFillColor(255,247,245);
+        doc.rect(0,0,pageW,26,"F");
         doc.setFont("helvetica","bold");
-        doc.setTextColor(47,37,34);
-        doc.setFontSize(15);
-        doc.text("KIT FASE 0 — Clareza sem ansiedade", margin, 14);
-
+        doc.setTextColor(31,23,21);
+        doc.setFontSize(14);
+        doc.text("KIT FASE 0 — Gestação sem Google", margin, 12);
         doc.setFont("helvetica","normal");
-        doc.setTextColor(109,87,80);
+        doc.setTextColor(106,84,80);
         doc.setFontSize(9.6);
-        doc.text("Ficha + resumo do dia. Não é diagnóstico clínico. Serve para reduzir ruído e organizar percepção.", margin, 20);
-
-        doc.setFontSize(9.2);
-        doc.text("Semana: " + (week || "—") + "   |   Data: " + (date || "—"), margin, 26);
+        doc.text("Normal × Observar × Vale conversar (não é diagnóstico).", margin, 18);
       }
 
-      function addPage(doc){
+      function newPage(doc){
         doc.addPage();
         const pageW = doc.internal.pageSize.getWidth();
-        const margin = 14;
-        pdfHeader(doc, pageW, margin, (weekEl.value||"").trim(), (dateEl.value||"").trim());
-        return 34; // y start after header
+        pdfHeader(doc, pageW, 14);
+        return 32;
       }
 
-      function textBlock(doc, text, x, y, maxW, lineH, bottomY){
+      function writeParagraph(doc, text, x, y, maxW, lineH, bottomY){
         const lines = doc.splitTextToSize(text, maxW);
-        for (const ln of lines){
-          if (y + lineH > bottomY){
-            y = addPage(doc);
-          }
+        for(const ln of lines){
+          if(y + lineH > bottomY) y = newPage(doc);
           doc.text(ln, x, y);
           y += lineH;
         }
         return y;
       }
 
-      function bulletBlock(doc, items, x, y, maxW, lineH, bottomY){
-        for (const item of items){
-          const pref = "• " + item;
-          const lines = doc.splitTextToSize(pref, maxW);
-          for (let i=0;i<lines.length;i++){
-            if (y + lineH > bottomY){
-              y = addPage(doc);
-            }
-            doc.text(lines[i], x, y);
-            y += lineH;
-          }
-          y += 1.2;
-        }
-        return y;
-      }
-
       function sectionTitle(doc, title, x, y, bottomY){
-        if (y + 8 > bottomY) y = addPage(doc);
+        if(y + 8 > bottomY) y = newPage(doc);
         doc.setFont("helvetica","bold");
-        doc.setTextColor(47,37,34);
         doc.setFontSize(12);
+        doc.setTextColor(31,23,21);
         doc.text(title, x, y);
         return y + 6;
       }
 
-      function downloadPDF(){
-        // guarantee full summary exists
-        if(!(out.value || "").trim()){
-          ensureSummary("full");
-        }
+      function downloadKitPDF(){
+        const quizResult = runQuiz();
+        if(!(out.value||"").trim()) generateReportText();
 
         if(!window.jspdf || !window.jspdf.jsPDF){
           alert("Falha ao carregar biblioteca de PDF (jsPDF). Verifique sua conexão e recarregue a página.");
@@ -752,84 +1188,130 @@
 
         const pageW = doc.internal.pageSize.getWidth();
         const pageH = doc.internal.pageSize.getHeight();
-
         const margin = 14;
         const x = margin;
         const maxW = pageW - margin*2;
         const bottomY = pageH - 14;
 
-        const week = (weekEl.value || "").trim();
-        const date = (dateEl.value || "").trim();
+        pdfHeader(doc, pageW, margin);
+        let y = 32;
 
-        pdfHeader(doc, pageW, margin, week, date);
+        const week = (weekEl.value||document.getElementById("week_m1").value||"").trim();
+        const date = (dateEl.value||document.getElementById("date_m1").value||"").trim();
+        const triHuman = (triReport.value||tri_m1.value||"").trim();
 
-        let y = 34;
-
-        // Zones as structured tables to prevent layout break
         doc.setFont("helvetica","normal");
-        doc.setTextColor(47,37,34);
+        doc.setFontSize(10);
+        doc.setTextColor(31,23,21);
+        y = writeParagraph(doc, `Data: ${date || "—"}   |   Semana: ${week || "—"}   |   Trimestre: ${triHuman || "—"}`, x, y, maxW, 5, bottomY);
+        y += 2;
 
-        y = sectionTitle(doc, "Decisão leve (3 zonas)", x, y, bottomY);
+        y = sectionTitle(doc, "Módulo 1 — Resultado do questionário", x, y, bottomY);
 
-        // Use autoTable for clean, non-breaking blocks
-        const zones = [
-          ["Pode ignorar (na maioria dos casos)",
-            "• Cansaço/sonolência (especialmente no início)\n• Enjoos leves/intermitentes\n• Oscilação emocional leve\n• Estranheza corporal difícil de nomear"
-          ],
-          ["Zona cinza (observe com calma)",
-            "• Aparece e some sem padrão\n• Dias bons vs. dias ruins\n• Comparação com outras gestantes\n• Buscar “semana exata” para tudo"
-          ],
-          ["Vale conversar (sem pânico)",
-            "• Sai do seu padrão e você não consegue soltar\n• A dúvida vira ansiedade persistente\n• Sinais descritos em fontes de saúde (links do kit)"
-          ],
+        if(!quizResult.overall){
+          y = writeParagraph(doc, "Nenhum sintoma foi marcado no questionário.", x, y, maxW, 5, bottomY);
+        } else {
+          const overall = quizResult.overall === "NORMAL"
+            ? "✅ Normal (na maioria dos casos)"
+            : quizResult.overall === "OBSERVAR"
+              ? "🟡 Observar com calma"
+              : "🔵 Vale conversar com profissional";
+
+          y = writeParagraph(doc, "Resultado geral: " + overall, x, y, maxW, 5, bottomY);
+          y = writeParagraph(doc, quizResult.calmText, x, y, maxW, 5, bottomY);
+          y = writeParagraph(doc, quizResult.nextAction, x, y, maxW, 5, bottomY);
+          y += 2;
+
+          const intMap = {leve:"Leve", media:"Média", forte:"Forte"};
+          const durMap = {hoje:"Hoje", "2-3":"2–3 dias", semana:"1 semana+"};
+
+          const rows = quizResult.items.map(it=>{
+            const cls = it.cls === "NORMAL" ? "Normal" : it.cls === "OBSERVAR" ? "Observar" : "Vale conversar";
+            return [it.name, intMap[it.intensity]||it.intensity, durMap[it.duration]||it.duration, cls];
+          });
+
+          doc.autoTable({
+            startY: y,
+            theme: "grid",
+            styles: { font: "helvetica", fontSize: 9.6, textColor:[31,23,21], cellPadding: 3.2, overflow:"linebreak" },
+            headStyles: { fillColor:[255,247,245], textColor:[31,23,21], fontStyle:"bold" },
+            margin: { left: margin, right: margin },
+            head: [["Sintoma","Intensidade","Duração","Resultado"]],
+            body: rows,
+            didDrawPage: function(data){ if(data.pageNumber > 1) pdfHeader(doc, pageW, margin); }
+          });
+
+          y = doc.lastAutoTable.finalY + 8;
+        }
+
+        y = sectionTitle(doc, "Checklist por trimestre (consulta rápida)", x, y, bottomY);
+
+        const triOrder = ["1º trimestre","2º trimestre","3º trimestre"];
+        for(const t of triOrder){
+          if(y + 10 > bottomY) y = newPage(doc);
+          doc.setFont("helvetica","bold");
+          doc.setFontSize(11);
+          doc.setTextColor(31,23,21);
+          doc.text(t, x, y);
+          y += 4;
+
+          const rows = (checklist[t] || []).map(r => [r.s, r.n, r.a]);
+
+          doc.autoTable({
+            startY: y,
+            theme: "grid",
+            styles: { font: "helvetica", fontSize: 9.4, textColor:[31,23,21], cellPadding: 3.2, overflow:"linebreak" },
+            headStyles: { fillColor:[255,247,245], textColor:[31,23,21], fontStyle:"bold" },
+            margin: { left: margin, right: margin },
+            head: [["Situação","✅ Normal","🟡 Observar / Vale conversar"]],
+            body: rows,
+            columnStyles: { 0:{cellWidth:44}, 1:{cellWidth:(maxW-44)/2}, 2:{cellWidth:(maxW-44)/2} },
+            didDrawPage: function(data){ if(data.pageNumber > 1) pdfHeader(doc, pageW, margin); }
+          });
+
+          y = doc.lastAutoTable.finalY + 8;
+        }
+
+        y = sectionTitle(doc, "Módulo 2 — O que fazer agora (3 saídas)", x, y, bottomY);
+
+        const guideRows = [
+          ["🟢 Normal", "Quando é tolerável e variável.", "Descansar + reduzir pesquisa."],
+          ["🟡 Observar", "Quando incomoda mas não derruba.", "2 linhas por dia: intensidade + o que melhora/piora."],
+          ["🔵 Conversar", "Quando persiste e te desgasta.", "Usar relato pronto + validar critério com profissional."]
         ];
 
-        // autoTable settings
         doc.autoTable({
           startY: y,
           theme: "grid",
-          styles: { font: "helvetica", fontSize: 9.8, textColor: [47,37,34], cellPadding: 3.5, overflow: "linebreak" },
-          headStyles: { fillColor: [255, 247, 245], textColor: [47,37,34], fontStyle:"bold" },
-          bodyStyles: { fillColor: [255,255,255] },
-          columnStyles: {
-            0: { cellWidth: 62, fontStyle:"bold" },
-            1: { cellWidth: maxW - 62 - 2 }
-          },
-          head: [["Zona", "Conteúdo"]],
-          body: zones,
+          styles: { font: "helvetica", fontSize: 9.6, textColor:[31,23,21], cellPadding: 3.3, overflow:"linebreak" },
+          headStyles: { fillColor:[255,247,245], textColor:[31,23,21], fontStyle:"bold" },
           margin: { left: margin, right: margin },
-          didDrawPage: function (data) {
-            // repeat header on new pages
-            if (data.pageNumber > 1){
-              pdfHeader(doc, pageW, margin, week, date);
-            }
-          }
+          head: [["Saída","Quando usar","O que fazer"]],
+          body: guideRows,
+          columnStyles: { 0:{cellWidth:28}, 1:{cellWidth:(maxW-28)*0.55}, 2:{cellWidth:(maxW-28)*0.45} },
+          didDrawPage: function(data){ if(data.pageNumber > 1) pdfHeader(doc, pageW, margin); }
         });
 
         y = doc.lastAutoTable.finalY + 8;
-        if (y > bottomY) y = addPage(doc);
 
-        // Questions section
         y = sectionTitle(doc, "Perguntas para levar ao profissional", x, y, bottomY);
-        const qItems = Array.from(document.querySelectorAll("#qList li")).map(li => li.textContent.trim()).filter(Boolean);
         doc.setFont("helvetica","normal");
         doc.setFontSize(10);
-        y = bulletBlock(doc, qItems, x, y, maxW, 5.0, bottomY);
+        doc.setTextColor(31,23,21);
+        const qItems = Array.from(document.querySelectorAll("#qList li")).map(li=>li.textContent.trim()).filter(Boolean);
+        for(const q of qItems){
+          y = writeParagraph(doc, "• " + q, x, y, maxW, 5, bottomY);
+          y += 1;
+        }
+        y += 2;
 
-        y += 3;
-        if (y > bottomY) y = addPage(doc);
-
-        // Summary section (FULL, paginated)
-        y = sectionTitle(doc, "Seu resumo copiável (completo)", x, y, bottomY);
+        y = sectionTitle(doc, "Módulo 3 — Relato pronto (completo)", x, y, bottomY);
         doc.setFont("courier","normal");
         doc.setFontSize(9.6);
-        doc.setTextColor(47,37,34);
+        doc.setTextColor(31,23,21);
+        y = writeParagraph(doc, (out.value||"").trim(), x, y, maxW, 4.6, bottomY);
 
-        const summary = (out.value || "").trim();
-        y = textBlock(doc, summary, x, y, maxW, 4.6, bottomY);
-
-        // Footer note (last page)
-        if (y + 10 > bottomY) y = addPage(doc);
+        if(y + 10 > bottomY) y = newPage(doc);
         doc.setFont("helvetica","normal");
         doc.setFontSize(9);
         doc.setTextColor(138,111,103);
@@ -837,31 +1319,24 @@
 
         const now = new Date();
         const stamp = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
-        doc.save(`KIT_FASE0_${stamp}.pdf`);
+        doc.save(`KIT_FASE0_GestacaoSemGoogle_${stamp}.pdf`);
       }
 
-      document.getElementById("btnPDF").addEventListener("click", downloadPDF);
+      document.getElementById("btnPDFTop").addEventListener("click", downloadKitPDF);
+      document.getElementById("btnPDFHere").addEventListener("click", downloadKitPDF);
 
-      // ---------- Reset (end of page, scroll top) ----------
-      function resetAll(){
-        picks.clear();
-        pills.forEach(p => p.setAttribute("aria-pressed","false"));
-        weekEl.value = "";
-        dateEl.value = "";
+      // ===== Reset total (volta ao topo) =====
+      document.getElementById("btnResetAll").addEventListener("click", ()=>{
+        // limpa quiz
+        document.getElementById("btnClearQuiz").click();
+        document.getElementById("week_m1").value = "";
+        // limpa relato
+        rpicks.clear();
+        reportPills.forEach(p=>p.setAttribute("aria-pressed","false"));
+        document.getElementById("week").value = "";
         out.value = "";
-        showStep("s1");
-        window.scrollTo({ top:0, behavior:"smooth" });
-      }
-      document.getElementById("btnResetBottom").addEventListener("click", resetAll);
-
-      // Build default date once (optional usability; does not force)
-      if(!dateEl.value){
-        const d = new Date();
-        const dd = String(d.getDate()).padStart(2,"0");
-        const mm = String(d.getMonth()+1).padStart(2,"0");
-        const yy = d.getFullYear();
-        dateEl.value = `${dd}/${mm}/${yy}`;
-      }
+        window.scrollTo({top:0, behavior:"smooth"});
+      });
 
     })();
   </script>
