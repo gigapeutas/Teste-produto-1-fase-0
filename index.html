@@ -43,7 +43,7 @@
 
       --focus: rgba(200,106,94,.28);
 
-      --headerH: 64px; /* atualizado via JS */
+      --headerH: 64px;
     }
 
     *{ box-sizing:border-box; }
@@ -57,21 +57,18 @@
         radial-gradient(900px 460px at 85% 20%, rgba(169,85,76,.14), transparent 60%),
         radial-gradient(900px 520px at 50% 110%, rgba(200,106,94,.10), transparent 55%),
         linear-gradient(180deg, var(--bg1), var(--bg2) 55%, var(--bg3));
-      padding-top: calc(var(--headerH) + env(safe-area-inset-top)); /* evita topo tampando */
+      padding-top: calc(var(--headerH) + env(safe-area-inset-top));
     }
 
-    .wrap{ max-width:var(--max); margin:0 auto; padding: 14px 14px 84px; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 14px 14px 94px; }
 
-    /* ===== Header (slim) ===== */
+    /* Header */
     .topbar{
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 50;
       padding: calc(10px + env(safe-area-inset-top)) 12px 10px;
-      display:flex;
-      justify-content:center;
+      display:flex; justify-content:center;
       pointer-events:none;
     }
     .topbarInner{
@@ -88,9 +85,7 @@
       justify-content:space-between;
       gap:10px;
     }
-    .brand{
-      display:flex; align-items:center; gap:10px; min-width: 160px;
-    }
+    .brand{ display:flex; align-items:center; gap:10px; min-width: 160px; }
     .dot{
       width:10px; height:10px; border-radius:999px;
       background: var(--accent);
@@ -113,7 +108,7 @@
       font-weight:900;
       font-size:13.5px;
       box-shadow: var(--shadow2);
-      transition: transform .05s ease, border-color .2s ease, opacity .2s ease;
+      transition: transform .05s ease, border-color .2s ease;
       user-select:none;
       white-space:nowrap;
       display:inline-flex;
@@ -141,24 +136,18 @@
       .btn{ padding:10px 12px; }
     }
 
-    /* ===== Drawer ===== */
+    /* Drawer */
     .overlay{
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: rgba(20,14,12,.35);
       backdrop-filter: blur(6px);
       z-index: 60;
-      opacity:0;
-      pointer-events:none;
+      opacity:0; pointer-events:none;
       transition: opacity .18s ease;
     }
     .overlay.on{ opacity:1; pointer-events:auto; }
-
     .drawer{
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100%;
+      position: fixed; top:0; right:0; height:100%;
       width: min(420px, 92vw);
       background: rgba(255,255,255,.92);
       backdrop-filter: blur(16px);
@@ -167,12 +156,10 @@
       z-index: 70;
       transform: translateX(102%);
       transition: transform .22s ease;
-      display:flex;
-      flex-direction:column;
+      display:flex; flex-direction:column;
       padding-top: env(safe-area-inset-top);
     }
     .drawer.on{ transform: translateX(0); }
-
     .drawerHd{
       padding: 16px 16px 10px;
       border-bottom: 1px solid var(--line);
@@ -183,14 +170,11 @@
     .drawerHd .row{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
     .drawerHd h3{ margin:0; font-size:14px; letter-spacing:.2px; }
     .drawerHd p{ margin:8px 0 0; color: var(--muted); font-size:13.2px; }
-
     .drawerBd{
       padding: 12px 16px 16px;
-      display:grid;
-      gap:10px;
+      display:grid; gap:10px;
       overflow:auto;
     }
-
     .navItem{
       border:1px solid var(--line);
       border-radius: 16px;
@@ -204,7 +188,7 @@
     .navItem span{ display:block; margin-top:4px; color: var(--muted); font-size:13px; }
     .navItem:hover{ border-color: rgba(200,106,94,.55); }
 
-    /* ===== Conteúdo ===== */
+    /* Conteúdo */
     section[id]{ scroll-margin-top: calc(var(--headerH) + env(safe-area-inset-top) + 14px); }
 
     .hero{
@@ -220,8 +204,7 @@
       content:"";
       position:absolute;
       inset:-40px -40px auto auto;
-      width: 240px;
-      height: 240px;
+      width: 240px; height: 240px;
       background: radial-gradient(circle at 30% 30%, rgba(200,106,94,.22), transparent 60%);
       filter: blur(2px);
     }
@@ -358,7 +341,7 @@
       align-items:center;
     }
 
-    /* Checklist: tabela no desktop, cards no mobile */
+    /* Checklist */
     table{
       width:100%;
       border-collapse:separate;
@@ -469,6 +452,21 @@
       color: var(--muted2);
       font-size: 13.2px;
     }
+
+    /* CTA Final */
+    .ctaFinal{
+      margin-top:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.86);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
   </style>
 </head>
 
@@ -542,9 +540,9 @@
     <!-- MÓDULO 1 -->
     <section class="card" id="m1">
       <div class="hd">
-        <h2>Módulo 1 — Questionário (Normal × Observar × Vale conversar)</h2>
+        <h2>Módulo 1 — Questionário (Normal x Observar x Vale conversar)</h2>
         <div class="meta">
-          Marque o que te representa hoje. O kit devolve um resultado neutro e um “próximo passo mínimo”.
+          Marque o que te representa hoje. No final do questionário, clique em <b>Gerar resultado</b>.
         </div>
       </div>
       <div class="bd">
@@ -572,21 +570,16 @@
             </select>
 
             <div class="hint">
-              Observação importante (calma): se você estiver com algo muito intenso “agora” (ex.: desmaio, falta de ar,
+              Nota calma: se você estiver com algo muito intenso “agora” (ex.: desmaio, falta de ar,
               dor no peito, febre alta, sangramento forte, dor muito forte), vale buscar orientação/atendimento imediatamente.
               O kit não é para decidir isso.
-            </div>
-
-            <div class="footer">
-              <button class="btn primary" id="btnRunQuiz" type="button">Gerar resultado</button>
-              <button class="btn" id="btnClearQuiz" type="button">Limpar</button>
             </div>
           </div>
 
           <div class="panel">
             <h3>Resultado</h3>
             <div id="quizSummary" class="resultBox">
-              <div class="badgeRes">Marque sintomas e clique em <b>Gerar resultado</b>.</div>
+              <div class="badgeRes">Responda o questionário e, no final, clique em <b>Gerar resultado</b>.</div>
             </div>
 
             <div class="hint">
@@ -600,6 +593,17 @@
         <div class="panel">
           <h3>Sintomas (marque apenas o que te representa hoje)</h3>
           <div id="quizList" style="display:grid; gap:10px;"></div>
+
+          <!-- BOTÕES AGORA FICAM AQUI (DEPOIS DE RESPONDER) -->
+          <div class="footer" style="justify-content:flex-start;">
+            <button class="btn primary" id="btnRunQuiz" type="button">Gerar resultado</button>
+            <button class="btn" id="btnClearQuiz" type="button">Limpar</button>
+            <button class="btn ghost" id="btnGoResult" type="button">Ver resultado</button>
+          </div>
+
+          <div class="hint">
+            Usabilidade: responda → gerar → ler a saída. Se der “vale conversar”, é para reduzir incerteza, não para causar pânico.
+          </div>
         </div>
 
         <div style="height:12px"></div>
@@ -616,8 +620,8 @@
             <thead>
               <tr>
                 <th style="width:32%;">Situação</th>
-                <th style="width:34%;">✅ Normal (na maioria)</th>
-                <th style="width:34%;">🟡 Observar / Vale conversar</th>
+                <th style="width:34%;">Normal (na maioria)</th>
+                <th style="width:34%;">Observar / Vale conversar</th>
               </tr>
             </thead>
             <tbody id="checklistBody"></tbody>
@@ -637,7 +641,7 @@
       <div class="bd">
         <div class="grid2">
           <div class="zone zOk">
-            <div class="tag">🟢 Normal (na maioria) — pode simplificar</div>
+            <div class="tag">Normal (na maioria) — pode simplificar</div>
             <ul>
               <li>Enjoos leves/intermitentes</li>
               <li>Cansaço/sono (especialmente no começo)</li>
@@ -648,7 +652,7 @@
           </div>
 
           <div class="zone zMid">
-            <div class="tag">🟡 Observar com calma (zona cinza)</div>
+            <div class="tag">Observar com calma (zona cinza)</div>
             <ul>
               <li>Aparece e some sem padrão</li>
               <li>Alternância de dias bons e ruins</li>
@@ -662,7 +666,7 @@
         <div style="height:12px"></div>
 
         <div class="zone zTalk">
-          <div class="tag">🔵 Vale conversar com profissional (sem pânico)</div>
+          <div class="tag">Vale conversar com profissional (sem pânico)</div>
           <ul>
             <li>Está te impedindo de funcionar</li>
             <li>Persistiu por vários dias e te desgasta</li>
@@ -678,7 +682,7 @@
     <section class="card" id="m3">
       <div class="hd">
         <h2>Módulo 3 — Relato pronto + PDF (kit completo)</h2>
-        <div class="meta">Gere um texto curto e correto para levar ao profissional. O PDF sai completo, sem cortar o resumo.</div>
+        <div class="meta">Gere um texto curto e correto para levar ao profissional. O PDF sai completo e sem “texto bugado”.</div>
       </div>
       <div class="bd">
         <div class="grid2">
@@ -736,7 +740,7 @@
             </div>
 
             <div class="hint">
-              O PDF inclui: resultado do questionário + checklist + guia + perguntas + relato (sem cortes).
+              O PDF inclui: resultado do questionário + checklist + guia + perguntas + relato (sem caracteres quebrados).
             </div>
           </div>
         </div>
@@ -758,6 +762,14 @@
       </div>
     </section>
 
+    <!-- CTA FINAL: PDF NO FIM (SEM MENU) -->
+    <div class="ctaFinal" id="ctaFinal">
+      <div class="small">
+        Pronto: se você só quer “pegar tudo organizado”, baixe o PDF completo aqui.
+      </div>
+      <button class="btn primary" id="btnPDFFinal" type="button">Baixar PDF (kit completo)</button>
+    </div>
+
     <!-- Reset -->
     <section class="hero" style="padding:14px; margin-top:12px;">
       <div class="footer" style="margin-top:0; justify-content:space-between;">
@@ -773,13 +785,10 @@
 
   <script>
     (function(){
-      // ===== Ajuste profissional: headerH real (inclui mudanças do mobile/viewport) =====
       const topbarInner = document.getElementById("topbarInner");
       function setHeaderH(){
         const r = topbarInner.getBoundingClientRect();
-        // topbar tem padding vertical (10px + safe-area-top + 10px). O safe-area já está no body padding-top.
-        // Aqui definimos apenas a altura do "pill".
-        const pillH = Math.ceil(r.height + 22); // folga real (sombra + espaço)
+        const pillH = Math.ceil(r.height + 22);
         document.documentElement.style.setProperty("--headerH", pillH + "px");
       }
       setHeaderH();
@@ -791,7 +800,7 @@
       }
       setTimeout(setHeaderH, 120);
 
-      // ===== Drawer =====
+      // Drawer
       const overlay = document.getElementById("overlay");
       const drawer = document.getElementById("drawer");
       const btnMenu = document.getElementById("btnMenu");
@@ -833,7 +842,7 @@
         setTimeout(()=> downloadKitPDF(), 80);
       });
 
-      // ===== Data =====
+      // Data
       const checklist = {
         "1º trimestre": [
           { s:"Náuseas / enjoos", n:"Leves a moderados, intermitentes; melhora com pequenas mudanças na alimentação.", a:"Se persistente e te impede de se alimentar/hidratar, vale conversar." },
@@ -875,7 +884,7 @@
         { v:"forte", label:"Forte (atrapalha muito)" }
       ];
 
-      // ===== Helpers =====
+      // Helpers
       function escapeHtml(s){
         return String(s)
           .replaceAll("&","&amp;")
@@ -885,7 +894,7 @@
           .replaceAll("'","&#039;");
       }
 
-      // ===== Checklist render =====
+      // Checklist render
       const tri_m1 = document.getElementById("tri_m1");
       const checklistBody = document.getElementById("checklistBody");
       const checklistCards = document.getElementById("checklistCards");
@@ -904,8 +913,8 @@
           <div class="mCard">
             <p class="mTitle">${escapeHtml(r.s)}</p>
             <div class="mCols">
-              <div class="mBox"><b>✅ Normal</b>${escapeHtml(r.n)}</div>
-              <div class="mBox"><b>🟡 Observar / Vale conversar</b>${escapeHtml(r.a)}</div>
+              <div class="mBox"><b>Normal</b>${escapeHtml(r.n)}</div>
+              <div class="mBox"><b>Observar / Vale conversar</b>${escapeHtml(r.a)}</div>
             </div>
           </div>
         `).join("");
@@ -913,7 +922,7 @@
       tri_m1.addEventListener("change", ()=> renderChecklist(tri_m1.value));
       renderChecklist(tri_m1.value);
 
-      // ===== Quiz build =====
+      // Quiz build
       const quizList = document.getElementById("quizList");
       const quizSummary = document.getElementById("quizSummary");
 
@@ -966,7 +975,7 @@
         if(intensity === "forte") score += 2;
         if(duration === "2-3") score += 1;
         if(duration === "semana") score += 2;
-        return score; // 0..4
+        return score;
       }
       function classifyScore(score){
         if(score <= 1) return "NORMAL";
@@ -974,9 +983,9 @@
         return "CONVERSAR";
       }
       function labelForClass(c){
-        if(c==="NORMAL") return {txt:"✅ Normal (na maioria dos casos)", cls:"bOk"};
-        if(c==="OBSERVAR") return {txt:"🟡 Observar com calma", cls:"bMid"};
-        return {txt:"🔵 Vale conversar com profissional", cls:"bTalk"};
+        if(c==="NORMAL") return {txt:"Normal (na maioria dos casos)", cls:"bOk"};
+        if(c==="OBSERVAR") return {txt:"Observar com calma", cls:"bMid"};
+        return {txt:"Vale conversar com profissional", cls:"bTalk"};
       }
       function worstOf(a,b){
         const rank = {NORMAL:0, OBSERVAR:1, CONVERSAR:2};
@@ -1018,7 +1027,7 @@
 
         const nextAction =
           overall === "NORMAL"
-            ? "Próximo passo mínimo: reduzir pesquisa + focar em descanso, alimentação e hidratação possíveis."
+            ? "Próximo passo mínimo: reduzir pesquisa e focar em descanso, alimentação e hidratação possíveis."
             : overall === "OBSERVAR"
               ? "Próximo passo mínimo: anotar 2 linhas (quando começou, intensidade, o que melhora/piora) por 2–3 dias."
               : "Próximo passo mínimo: usar o Relato pronto (Módulo 3) e levar as perguntas do kit.";
@@ -1040,7 +1049,14 @@
         return { tri, week, date, overall, items: chosen, calmText, nextAction };
       }
 
-      document.getElementById("btnRunQuiz").addEventListener("click", runQuiz);
+      document.getElementById("btnRunQuiz").addEventListener("click", ()=>{
+        runQuiz();
+        // feedback de fluxo: desce para o resultado
+        document.querySelector("#m1 .panel:nth-child(2)").scrollIntoView({behavior:"smooth", block:"start"});
+      });
+      document.getElementById("btnGoResult").addEventListener("click", ()=>{
+        document.querySelector("#m1 .panel:nth-child(2)").scrollIntoView({behavior:"smooth", block:"start"});
+      });
       document.getElementById("btnClearQuiz").addEventListener("click", ()=>{
         quizSymptoms.forEach(s=>{
           const chk = document.getElementById(`chk_${s.id}`);
@@ -1051,10 +1067,10 @@
           document.getElementById(`int_${s.id}`).value = "leve";
           document.getElementById(`dur_${s.id}`).value = "hoje";
         });
-        quizSummary.innerHTML = `<div class="badgeRes">Marque sintomas e clique em <b>Gerar resultado</b>.</div>`;
+        quizSummary.innerHTML = `<div class="badgeRes">Responda o questionário e, no final, clique em <b>Gerar resultado</b>.</div>`;
       });
 
-      // ===== Relato =====
+      // Relato
       const weekEl = document.getElementById("week");
       const dateEl = document.getElementById("date");
       const triReport = document.getElementById("triReport");
@@ -1075,7 +1091,6 @@
         const focus = Array.from(rpicks);
         const focusText = focus.length ? focus.join(", ") : "(não selecionei foco)";
 
-        // leitura neutra baseada em padrões comuns (sem prometer diagnóstico)
         let pattern = "Padrão provável: adaptação normal da fase com variações (corpo e mente em ritmos diferentes).";
         let action = "Ação mínima: reduzir pesquisa, registrar o essencial e validar com profissional se persistir.";
 
@@ -1124,7 +1139,7 @@
 
       document.getElementById("btnTop").addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
 
-      // ===== Defaults (data de hoje) =====
+      // Defaults
       (function initDates(){
         const d = new Date();
         const dd = String(d.getDate()).padStart(2,"0");
@@ -1134,7 +1149,28 @@
         if(!dateEl.value) dateEl.value = `${dd}/${mm}/${yy}`;
       })();
 
-      // ===== PDF (robusto, sem cortar resumo) =====
+      // ====== PDF FIX: sanitização (remove emoji / símbolos que quebram jsPDF) ======
+      function pdfSafe(text){
+        if(text == null) return "";
+        let s = String(text);
+
+        // remove emojis e variation selectors (causadores clássicos de “Ø=Ý...” no jsPDF)
+        s = s.replace(/[\u{1F300}-\u{1FAFF}]/gu, "");
+        s = s.replace(/[\uFE0E\uFE0F]/g, ""); // variation selectors
+        s = s.replace(/[\u200D]/g, ""); // zero-width joiner
+
+        // troca símbolos problemáticos por equivalentes simples
+        s = s.replace(/[×]/g, "x");
+        s = s.replace(/[—–]/g, "-");
+        s = s.replace(/[“”]/g, '"');
+        s = s.replace(/[’]/g, "'");
+        s = s.replace(/[•]/g, "-");
+
+        // normaliza espaços
+        s = s.replace(/\s+\n/g, "\n").replace(/\n\s+/g, "\n");
+        return s;
+      }
+
       function pdfHeader(doc, pageW, margin){
         doc.setFillColor(255,247,245);
         doc.rect(0,0,pageW,26,"F");
@@ -1145,7 +1181,7 @@
         doc.setFont("helvetica","normal");
         doc.setTextColor(106,84,80);
         doc.setFontSize(9.6);
-        doc.text("Normal × Observar × Vale conversar (não é diagnóstico).", margin, 18);
+        doc.text("Normal x Observar x Vale conversar (não é diagnóstico).", margin, 18);
       }
 
       function newPage(doc){
@@ -1156,7 +1192,7 @@
       }
 
       function writeParagraph(doc, text, x, y, maxW, lineH, bottomY){
-        const lines = doc.splitTextToSize(text, maxW);
+        const lines = doc.splitTextToSize(pdfSafe(text), maxW);
         for(const ln of lines){
           if(y + lineH > bottomY) y = newPage(doc);
           doc.text(ln, x, y);
@@ -1170,11 +1206,12 @@
         doc.setFont("helvetica","bold");
         doc.setFontSize(12);
         doc.setTextColor(31,23,21);
-        doc.text(title, x, y);
+        doc.text(pdfSafe(title), x, y);
         return y + 6;
       }
 
       function downloadKitPDF(){
+        // garante que resultado e relato existam
         const quizResult = runQuiz();
         if(!(out.value||"").trim()) generateReportText();
 
@@ -1203,7 +1240,7 @@
         doc.setFont("helvetica","normal");
         doc.setFontSize(10);
         doc.setTextColor(31,23,21);
-        y = writeParagraph(doc, `Data: ${date || "—"}   |   Semana: ${week || "—"}   |   Trimestre: ${triHuman || "—"}`, x, y, maxW, 5, bottomY);
+        y = writeParagraph(doc, `Data: ${date || "-"}   |   Semana: ${week || "-"}   |   Trimestre: ${triHuman || "-"}`, x, y, maxW, 5, bottomY);
         y += 2;
 
         y = sectionTitle(doc, "Módulo 1 — Resultado do questionário", x, y, bottomY);
@@ -1211,11 +1248,10 @@
         if(!quizResult.overall){
           y = writeParagraph(doc, "Nenhum sintoma foi marcado no questionário.", x, y, maxW, 5, bottomY);
         } else {
-          const overall = quizResult.overall === "NORMAL"
-            ? "✅ Normal (na maioria dos casos)"
-            : quizResult.overall === "OBSERVAR"
-              ? "🟡 Observar com calma"
-              : "🔵 Vale conversar com profissional";
+          const overall =
+            quizResult.overall === "NORMAL" ? "Normal (na maioria dos casos)" :
+            quizResult.overall === "OBSERVAR" ? "Observar com calma" :
+            "Vale conversar com profissional";
 
           y = writeParagraph(doc, "Resultado geral: " + overall, x, y, maxW, 5, bottomY);
           y = writeParagraph(doc, quizResult.calmText, x, y, maxW, 5, bottomY);
@@ -1227,7 +1263,7 @@
 
           const rows = quizResult.items.map(it=>{
             const cls = it.cls === "NORMAL" ? "Normal" : it.cls === "OBSERVAR" ? "Observar" : "Vale conversar";
-            return [it.name, intMap[it.intensity]||it.intensity, durMap[it.duration]||it.duration, cls];
+            return [pdfSafe(it.name), intMap[it.intensity]||it.intensity, durMap[it.duration]||it.duration, cls];
           });
 
           doc.autoTable({
@@ -1252,10 +1288,10 @@
           doc.setFont("helvetica","bold");
           doc.setFontSize(11);
           doc.setTextColor(31,23,21);
-          doc.text(t, x, y);
+          doc.text(pdfSafe(t), x, y);
           y += 4;
 
-          const rows = (checklist[t] || []).map(r => [r.s, r.n, r.a]);
+          const rows = (checklist[t] || []).map(r => [pdfSafe(r.s), pdfSafe(r.n), pdfSafe(r.a)]);
 
           doc.autoTable({
             startY: y,
@@ -1263,7 +1299,7 @@
             styles: { font: "helvetica", fontSize: 9.4, textColor:[31,23,21], cellPadding: 3.2, overflow:"linebreak" },
             headStyles: { fillColor:[255,247,245], textColor:[31,23,21], fontStyle:"bold" },
             margin: { left: margin, right: margin },
-            head: [["Situação","✅ Normal","🟡 Observar / Vale conversar"]],
+            head: [["Situação","Normal","Observar / Vale conversar"]],
             body: rows,
             columnStyles: { 0:{cellWidth:44}, 1:{cellWidth:(maxW-44)/2}, 2:{cellWidth:(maxW-44)/2} },
             didDrawPage: function(data){ if(data.pageNumber > 1) pdfHeader(doc, pageW, margin); }
@@ -1275,9 +1311,9 @@
         y = sectionTitle(doc, "Módulo 2 — O que fazer agora (3 saídas)", x, y, bottomY);
 
         const guideRows = [
-          ["🟢 Normal", "Quando é tolerável e variável.", "Descansar + reduzir pesquisa."],
-          ["🟡 Observar", "Quando incomoda mas não derruba.", "2 linhas por dia: intensidade + o que melhora/piora."],
-          ["🔵 Conversar", "Quando persiste e te desgasta.", "Usar relato pronto + validar critério com profissional."]
+          ["Normal", "Quando é tolerável e variável.", "Descansar e reduzir pesquisa."],
+          ["Observar", "Quando incomoda mas não derruba.", "2 linhas/dia: intensidade + o que melhora/piora."],
+          ["Conversar", "Quando persiste e te desgasta.", "Usar relato pronto e validar critério com profissional."]
         ];
 
         doc.autoTable({
@@ -1324,13 +1360,12 @@
 
       document.getElementById("btnPDFTop").addEventListener("click", downloadKitPDF);
       document.getElementById("btnPDFHere").addEventListener("click", downloadKitPDF);
+      document.getElementById("btnPDFFinal").addEventListener("click", downloadKitPDF);
 
-      // ===== Reset total (volta ao topo) =====
+      // Reset total
       document.getElementById("btnResetAll").addEventListener("click", ()=>{
-        // limpa quiz
         document.getElementById("btnClearQuiz").click();
         document.getElementById("week_m1").value = "";
-        // limpa relato
         rpicks.clear();
         reportPills.forEach(p=>p.setAttribute("aria-pressed","false"));
         document.getElementById("week").value = "";
